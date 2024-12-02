@@ -1,0 +1,24 @@
+.form-main {
+  margin-top: 7%;
+  /* display: flex; */
+}
+
+.heading1 {
+  justify-content: center;
+  text-align: center;
+  margin-left: 35%;
+  width: 35%;
+  border: 2px solid rgb(0, 0, 0);
+  background-color: antiquewhite;
+}
+
+.heading3 {
+  margin: 2% 0 0 2%;
+}
+
+.heading4 {
+  margin: 2% 0 0 2%;
+}
+.form-row {
+  margin: 2% 0 0 2%;
+}

@@ -1,0 +1,51 @@
+.about-us-container {
+  padding: 20px;
+  padding-left: 50px;
+}
+
+.heading-container {
+  text-align: left;
+  margin-bottom: 100px;
+}
+
+.about-us-heading {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.about-us-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-side {
+  flex: 1;
+  padding-right: 10px;
+}
+
+.right-side {
+  flex: 1;
+  padding-left: 400px;
+}
+
+.about-us-image {
+  width: 40%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo1,
+.logo {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.logo {
+  color: #18965f;
+}
