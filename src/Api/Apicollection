@@ -1,0 +1,902 @@
+{
+	"info": {
+		"_postman_id": "6564c5e9-f877-47b7-8fbb-15ab24531297",
+		"name": "Samasya Sewa V1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37058032"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Test to verify the schema of the response\r",
+									"pm.test(\"Schema is valid\", function () {\r",
+									"  var schema = {\r",
+									"    type: \"object\",\r",
+									"    properties: {\r",
+									"      success: { type: \"boolean\" },\r",
+									"      message: { type: \"string\" },\r",
+									"      data: {\r",
+									"        type: \"object\",\r",
+									"        properties: {\r",
+									"          fullname: { type: \"string\" },\r",
+									"          address: { type: \"string\" },\r",
+									"          contactNo: { type: \"string\" },\r",
+									"          email: { type: \"string\", format: \"email\" }\r",
+									"        },\r",
+									"        required: [\"fullname\", \"address\", \"contactNo\", \"email\"]\r",
+									"      },\r",
+									"      errors: { type: \"null\" },\r",
+									"      errorCode: { type: \"number\" },\r",
+									"      timestamp: { type: \"number\" },\r",
+									"      path: { type: \"string\" }\r",
+									"    },\r",
+									"    required: [\"success\", \"message\", \"data\", \"errors\", \"errorCode\", \"timestamp\", \"path\"]\r",
+									"  };\r",
+									"\r",
+									"  var response = pm.response.json();\r",
+									"  pm.expect(tv4.validate(response, schema)).to.be.true;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}user/profile",
+							"host": [
+								"{{URL}}user"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}user/profile",
+									"host": [
+										"{{URL}}user"
+									],
+									"path": [
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Nov 2024 09:42:47 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"User Profile\",\n    \"data\": {\n        \"fullname\": \"Rojan\",\n        \"address\": \"Lagan Tole - Kathmandu\",\n        \"contactNo\": \"9851231281\",\n        \"email\": \"rozan@gmail.com\"\n    },\n    \"errors\": null,\n    \"errorCode\": 0,\n    \"timestamp\": 1732182167815,\n    \"path\": \"/api/user/profile\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update-Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"fullname\": \"Pakohi\",\r\n  \"contact\": {\r\n    \"primaryNumber\": \"9867183121\",\r\n    \"secondaryNumber\": \"9867183562\"\r\n  },\r\n  \"address\": {\r\n    \"tole\": \"Kalanki\",\r\n    \"district\": \"Kathmandu\",\r\n    \"ward\": 14,\r\n    \"province\": \"Bagmati\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}user/profile",
+							"host": [
+								"{{URL}}user"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change-Password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"oldPassword\": \"pakohi@123\",\r\n  \"newPassword\": \"123@pakohi\",\r\n  \"confirmNewPassword\": \"123@pakohi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}user/change-password",
+							"host": [
+								"{{URL}}user"
+							],
+							"path": [
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Extract access token from the response body and save it into an environment variable\r",
+									"pm.test(\"Extract and save access token into environment variable\", function () {\r",
+									"    var responseData = pm.response.json();\r",
+									"    pm.expect(responseData).to.have.property('data').that.is.an('object').with.property('accessToken');\r",
+									"    pm.environment.set(\"access_token\", responseData.data.accessToken);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"pakohi7946@cantozil.com\",\r\n    \"password\" : \"123@pakohi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}auth/login",
+							"host": [
+								"{{URL}}auth"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Update the test script to store the accessToken from the response body to the global AdminAccessToken variable\r",
+									"pm.test(\"Save the accessToken to the global AdminAccessToken variable\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.globals.set(\"AdminAccessToken\", jsonData.data.accessToken);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"admin@gmail.com\",\r\n    \"password\" : \"admin@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}auth/login",
+							"host": [
+								"{{URL}}auth"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fullname\": \"Pakohi\",\r\n  \"email\": \"pakohi7946@cantozil.com\",\r\n  \"password\": \"pakohi@123\",\r\n  \"contact\": {\r\n    \"primaryNumber\": \"9867183121\"\r\n  },\r\n  \"address\": {\r\n    \"tole\": \"Bharatpur\",\r\n    \"district\": \"Chitwan\",\r\n    \"ward\": 18,\r\n    \"province\": \"Bagmati\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}auth/register",
+							"host": [
+								"{{URL}}auth"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Registration-Sucess",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullname\": \"Aashish Rana\",\r\n  \"email\": \"aashish@gmail.com\",\r\n  \"password\": \"aashish@123\",\r\n  \"contact\": {\r\n    \"primaryNumber\": \"9851029123\",\r\n    \"secondaryNumber\": \"9851238173\"\r\n  },\r\n  \"address\": {\r\n    \"tole\": \"Lakeside Pokhara\",\r\n    \"district\": \"Kaski\",\r\n    \"ward\": 28,\r\n    \"province\": \"Gandaki\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}auth/register",
+									"host": [
+										"{{URL}}auth"
+									],
+									"path": [
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Nov 2024 10:18:18 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"User Created Successfully\",\n    \"data\": {\n        \"fullname\": \"Aashish Rana\",\n        \"email\": \"aashish@gmail.com\"\n    },\n    \"errors\": null,\n    \"errorCode\": 0,\n    \"timestamp\": 1732184298804,\n    \"path\": \"/api/auth/register\"\n}"
+						},
+						{
+							"name": "Registration-Failure",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullname\": \"Aashish Rana\",\r\n  \"email\": \"aashish@gmail.com\",\r\n  \"password\": \"aashish@123\",\r\n  \"contact\": {\r\n    \"primaryNumber\": \"9851029123\",\r\n    \"secondaryNumber\": \"9851238173\"\r\n  },\r\n  \"address\": {\r\n    \"tole\": \"Lakeside Pokhara\",\r\n    \"district\": \"Kaski\",\r\n    \"ward\": 28,\r\n    \"province\": \"Gandaki\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}auth/register",
+									"host": [
+										"{{URL}}auth"
+									],
+									"path": [
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 21 Nov 2024 10:19:46 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"An unexpected error occured\",\n    \"data\": null,\n    \"errors\": [\n        \"Email already exists.\"\n    ],\n    \"errorCode\": 1001,\n    \"timestamp\": 1732184386180,\n    \"path\": \"/api/auth/register\"\n}"
+						}
+					]
+				},
+				{
+					"name": "RefreshToken",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"token\": \"034388c3-b11b-4be8-9ea1-26039c566b96\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}auth/refreshToken",
+							"host": [
+								"{{URL}}auth"
+							],
+							"path": [
+								"refreshToken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot-Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"mhrjn.rozan2000@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}auth/forgot-password",
+							"host": [
+								"{{URL}}auth"
+							],
+							"path": [
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset-Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newPassword\" : \"d@ju1410\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}auth/reset-password?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaHJqbi5yb3phbjIwMDBAZ21haWwuY29tIiwiaWF0IjoxNzMyNTI4OTExLCJleHAiOjE3MzI1MzI1MTF9.FRI8cp8296BHXby4h8QlkoNFgcOeqMLwv6lyKxvl0bs",
+							"host": [
+								"{{URL}}auth"
+							],
+							"path": [
+								"reset-password"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtaHJqbi5yb3phbjIwMDBAZ21haWwuY29tIiwiaWF0IjoxNzMyNTI4OTExLCJleHAiOjE3MzI1MzI1MTF9.FRI8cp8296BHXby4h8QlkoNFgcOeqMLwv6lyKxvl0bs"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify-User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"pakohi7946@cantozil.com\",\r\n    \"otp\" : \"318106\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}auth/verify-user",
+							"host": [
+								"{{URL}}auth"
+							],
+							"path": [
+								"verify-user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "All Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{AdminAccessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}admin/users",
+							"host": [
+								"{{URL}}admin"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User's Detail",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{AdminAccessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}admin/user/66",
+							"host": [
+								"{{URL}}admin"
+							],
+							"path": [
+								"user",
+								"66"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Dashboard",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{AdminAccessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}admin/dashboard",
+							"host": [
+								"{{URL}}admin"
+							],
+							"path": [
+								"dashboard"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Complaint's Status",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{AdminAccessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"IN_PROGRESS\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}admin/complaint/18",
+							"host": [
+								"{{URL}}admin"
+							],
+							"path": [
+								"complaint",
+								"18"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Complaint",
+			"item": [
+				{
+					"name": "Get All Complaints for User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}complaints",
+							"host": [
+								"{{URL}}complaints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Complaint details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}complaint/18",
+							"host": [
+								"{{URL}}complaint"
+							],
+							"path": [
+								"18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search and Filter Complaints",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}complaints/search",
+							"host": [
+								"{{URL}}complaints"
+							],
+							"path": [
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Complaint",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"complaintTitle\": \"Street Dogs\",\r\n  \"description\": \"There are so many street dogs in this road.\",\r\n  \"categoryName\": \"Road\",\r\n  \"location\": {\r\n    \"tole\": \"Bafal\",\r\n    \"district\": \"Kathmandu\",\r\n    \"ward\": 15\r\n  },\r\n  \"attachments\": [\r\n    {\r\n      \"url\": \"string.com\"\r\n    },\r\n    {\r\n        \"url\" : \"stringgg.com\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}complaint",
+							"host": [
+								"{{URL}}complaint"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update-Complaint",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"complaintTitle\": \"Street Dogs\",\r\n        \"description\": \"There are so many street dogs in this road near Bafal Housing.\",\r\n        \"categoryName\": \"Road\",\r\n        \"location\": {\r\n            \"tole\": \"Bafal\",\r\n            \"district\": \"Kathmandu\",\r\n            \"ward\": 15\r\n        },\r\n        \"attachments\": [\r\n            {\r\n                \"url\": \"dogs.com\"\r\n            },\r\n            {\r\n                \"url\": \"many-dogs.com\"\r\n            }\r\n        ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}complaint/18",
+							"host": [
+								"{{URL}}complaint"
+							],
+							"path": [
+								"18"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

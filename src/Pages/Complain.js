@@ -9,8 +9,34 @@ const Complain = () => {
     setSelectedGrievance(e.target.value);
   };
 
-  const handleNext = () => {
-    alert(`Selected Grievance Type: ${selectedGrievance || ""}`);
+  const handleSubmit = async () => {
+    if (!selectedGrievance) {
+      alert("Please select a grievance type before submitting.");
+      return;
+    }
+
+    try {
+      const response = await fetch("", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          grievanceType: selectedGrievance,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit the complaint");
+      }
+
+      const data = await response.json();
+      console.log("API Response:", data);
+      alert("Complaint submitted successfully!");
+    } catch (error) {
+      console.error("Error submitting the complaint:", error);
+      alert("Failed to submit the complaint. Please try again.");
+    }
   };
 
   return (
@@ -24,12 +50,12 @@ const Complain = () => {
           onChange={handleChange}
         >
           <option value="">-</option>
-          <option value="type1">1</option>
+          <option value="type1">Disaster</option>
           <option value="type2">2</option>
         </select>
       </div>
       <Link to={"/profile"}>
-        <button className="next-button" onClick={handleNext}>
+        <button className="next-button" onClick={handleSubmit}>
           NEXT
         </button>
       </Link>
