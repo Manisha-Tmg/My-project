@@ -1,17 +1,42 @@
 import React from "react";
 import "../Css/Profile.css";
+import { useState, useEffect } from "react";
 
 const Profile = ({ user }) => {
-  const sampleUser = {
-    name: "Mansa",
-    contact: 9813245634,
-    province: "Bagmati",
-    tole: 5,
-    wardNo: 8,
-    location: "Naxal",
-    email: "mansa@gmail.com",
-  };
-  const userData = user || sampleUser;
+  const [userData, setUserData] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch("", {
+          method: "GET",
+          headers: {},
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch user data");
+        }
+
+        const data = await response.json();
+        setUserData(data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!userData) {
+    return <div>No user data available.</div>;
+  }
 
   return (
     <div className="profile">

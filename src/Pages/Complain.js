@@ -54,7 +54,7 @@ const Complain = () => {
           <option value="type2">2</option>
         </select>
       </div>
-      <Link to={"/profile"}>
+      <Link to={"/form"}>
         <button className="next-button" onClick={handleSubmit}>
           NEXT
         </button>
