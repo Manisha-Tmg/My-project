@@ -11,7 +11,7 @@ const Login = () => {
     event.preventDefault();
     console.log("button clicked", email, password);
     try {
-      const res = await fetch("", {
+      const res = await fetch("/api/v1/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -13,8 +13,8 @@ const Aboutus = () => {
         <div className="about-us-content">
           <div className="left-side">
             <div className="logo-container">
-              <div className="logo1">Samasya</div>
-              <div className="logo">Sewa</div>
+              <div className="about-logo1">About</div>
+              <div className="about-logo">Us</div>
             </div>
 
             <p>

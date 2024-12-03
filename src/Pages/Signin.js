@@ -13,6 +13,9 @@ const Signin = () => {
   const [contact, setContact] = useState("");
 
   const navigate = useNavigate();
+  // const submitButton = async (event) => {
+  //   console.log("This is buttion");
+  // };
 
   const handleSignup = async (event) => {
     event.preventDefault();
@@ -28,8 +31,9 @@ const Signin = () => {
       contact
     );
     try {
-      const res = await fetch("", {
+      const res = await fetch("/api/v1/auth/register", {
         method: "POST",
+        // mode: "no-cors",
         headers: {
           "content-type": "application/json",
         },

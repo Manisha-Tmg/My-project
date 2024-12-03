@@ -1,6 +1,10 @@
 * {
   padding: 0;
   margin: 0;
+  background-color: #0e2f3c;
+  font-family: sans-serif;
+  /* color: #fbfdfd; Text */
+  /* background-color: #ef1105; button*/
 }
 .navbar {
   width: 100%;
@@ -9,7 +13,7 @@
   top: 0;
   display: flex;
   align-items: center;
-  background-color: rgb(255, 255, 255);
+  background-color: #0e2f3c;
   justify-content: space-between;
   padding: 0 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -31,11 +35,11 @@
 }
 
 .logo1 {
-  color: #000000; /* Tomato color for distinction */
+  color: #ffffff;
 }
 
 .logo {
-  color: #1ebe79; /* Green color for distinction */
+  color: #e82f22;
 }
 
 /* Navigation links */
@@ -48,7 +52,7 @@
 
 .nav-links li {
   margin: 0 15px;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 249, 249);
   font-weight: bold;
   cursor: pointer;
   text-decoration: underline;
@@ -72,32 +76,14 @@
   margin-left: 10px;
   cursor: pointer;
   transition: background-color 0.3s;
-  color: #1ebe79;
-  background-color: #ffffff;
-
-  border: 2px solid #1ebe79;
-}
-.btn2 {
-  background-color: #1ebe79;
-  border: 2px solid #1ebe79;
   color: #ffffff;
-  font-weight: bolder;
-  border-radius: 5px;
-  padding: 8px 16px;
-  margin-left: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
+  background-color: #ef1105;
 
-/* Button hover effects */
-.btn2:hover {
-  color: #1ebe79;
-  background-color: #ffffff;
-  border: 2px solid #1ebe79;
+  border: 2px solid #ef1105;
 }
 
 .btn1:hover {
-  background-color: #1ebe79;
-  border: 2px solid #1ebe79;
-  color: #fffcfc;
+  background-color: #ffffff;
+  border: 2px solid #ef1105;
+  color: #ef1105;
 }

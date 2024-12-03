@@ -8,8 +8,6 @@
   text-align: center;
   margin-left: 35%;
   width: 35%;
-  border: 2px solid rgb(0, 0, 0);
-  background-color: antiquewhite;
 }
 
 .heading3 {
@@ -21,4 +19,14 @@
 }
 .form-row {
   margin: 2% 0 0 2%;
+}
+.submit {
+  background-color: #e82f22;
+  border: 2px solid #e82f22;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  color: white;
+  border-radius: 4px;
+  font-weight: bold;
 }
