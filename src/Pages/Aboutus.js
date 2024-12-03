@@ -25,8 +25,7 @@ const Aboutus = () => {
               Commodo id quisque pharetra, sapien ultrices faucibus. Eget
               bibendum a; ad habitant maecenas ornare. Torquent fames purus
               justo aptent ligula magna vestibulum senectus mollis. Risus dictum
-              habitasse cubilia elit tellus ullamcorper a. Blandit fames porta
-              donec tellus convallis duis turpis. Eros hac ut neque orci,
+              habitasse cubilia elit tellus ullamcorper a. Blandit famei,
               aliquet non felis molestie. Varius primis etiam pulvinar; ante
               rhoncus porta sapien praesent cras. Malesuada volutpat donec purus
               porttitor dui penatibus. Elementum vulputate condimentum odio
