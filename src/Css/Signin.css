@@ -49,10 +49,10 @@
   border-color: #000000;
 }
 
-.form-control:focus {
-  border-color: #e82f22;
-  outline: none;
-}
+/* .form-control:focus { */
+/* border-color: #e82f22;npm */
+/* outline: none;
+} */
 
 .btn11 {
   background-color: #e82f22;
@@ -69,8 +69,8 @@
 }
 
 .btn11:hover {
-  background-color: #e82f22;
-  border: 2px solid #e82f22;
+  background-color: #930c03;
+  /* border: 2px solid #e82f22; */
 }
 
 .account1 {
