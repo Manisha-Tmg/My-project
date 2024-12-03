@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../Css/Signin.css";
+import { APIURL } from "../env";
 
 const Signin = () => {
   const [fullname, setFullname] = useState("");
@@ -10,14 +11,12 @@ const Signin = () => {
   const [tole, setTole] = useState("");
   const [ward, setWard] = useState("");
   const [location, setLocation] = useState("");
-  const [contact, setContact] = useState("");
+  const [Primarycontact, setPrimarycontact] = useState("");
+  const [Secondarycontact, setSecondarycontact] = useState("");
 
   const navigate = useNavigate();
-  // const submitButton = async (event) => {
-  //   console.log("This is buttion");
-  // };
 
-  const handleSignup = async (event) => {
+  async function handleSignup(event) {
     event.preventDefault();
     console.log(
       "button clicked",
@@ -28,14 +27,16 @@ const Signin = () => {
       tole,
       ward,
       location,
-      contact
+      Primarycontact,
+      Secondarycontact
     );
     try {
-      const res = await fetch("/api/v1/auth/register", {
+      const res = await fetch(`${APIURL}/api/v1/auth/register`, {
         method: "POST",
         // mode: "no-cors",
         headers: {
           "content-type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify({
           fullname,
@@ -45,7 +46,8 @@ const Signin = () => {
           tole,
           ward,
           location,
-          contact,
+          Primarycontact,
+          Secondarycontact,
         }),
       });
       const userData = await res.json();
@@ -58,12 +60,11 @@ const Signin = () => {
     } catch (error) {
       console.log("errorrrr 404", error);
     }
-  };
+  }
   return (
     <div className="body-signin" onSubmit={handleSignup}>
       <form className="form-sign">
         <h2 className="h-22">SIGN UP</h2>
-
         <div className="m-3">
           <label htmlFor="fullname" className="form-label">
             Fullname
@@ -78,7 +79,6 @@ const Signin = () => {
             required
           />
         </div>
-
         <div className="m-3">
           <label htmlFor="email" className="form-label">
             Email address
@@ -93,7 +93,6 @@ const Signin = () => {
             required
           />
         </div>
-
         <div className="m-3">
           <label htmlFor="password" className="form-label">
             Password
@@ -108,10 +107,8 @@ const Signin = () => {
             required
           />
         </div>
-
         {/* Address Section */}
         <h3 className="h-22">Address Information</h3>
-
         <div className="m-3">
           <label htmlFor="state" className="form-label">
             State
@@ -126,7 +123,6 @@ const Signin = () => {
             required
           />
         </div>
-
         <div className="m-3">
           <label htmlFor="municipality" className="form-label">
             Tole
@@ -141,7 +137,6 @@ const Signin = () => {
             required
           />
         </div>
-
         <div className="m-3">
           <label htmlFor="ward" className="form-label">
             Ward
@@ -156,7 +151,6 @@ const Signin = () => {
             required
           />
         </div>
-
         <div className="m-3">
           <label htmlFor="location" className="form-label">
             Location
@@ -171,26 +165,37 @@ const Signin = () => {
             required
           />
         </div>
-
         <div className="m-3">
           <label htmlFor="contact" className="form-label">
-            Contact
+            Primarycontact
           </label>
           <input
             type="tel"
             className="form-control"
-            id="contact"
+            id="Primarycontact"
             placeholder="Enter your contact number"
-            value={contact}
-            onChange={(e) => setContact(e.target.value)}
+            value={Primarycontact}
+            onChange={(e) => setPrimarycontact(e.target.value)}
+            required
+          />
+        </div>{" "}
+        <div className="m-3">
+          <label htmlFor="contact" className="form-label">
+            Secondarycontact
+          </label>
+          <input
+            type="tel"
+            className="form-control"
+            id="SEcondarycontact"
+            placeholder="Enter your contact number"
+            value={Secondarycontact}
+            onChange={(e) => setSecondarycontact(e.target.value)}
             required
           />
         </div>
-
         <button type="submit" className="btn11" onClick={handleSignup}>
           Sign In
         </button>
-
         <label className="account1">
           Already have an account?{" "}
           <Link to={"/Login"} className="log">

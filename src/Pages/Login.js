@@ -70,7 +70,7 @@ const Login = () => {
           </Link>
         </div>
 
-        <button className="logbutton" type="submit">
+        <button className="logbutton" type="submit" onClick={handleLogin}>
           Login
         </button>
 
