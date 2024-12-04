@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../Css/Login.css";
+import { APIURL } from "../env";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async (event) => {
+  async function handleLogin(event) {
     event.preventDefault();
     console.log("button clicked", email, password);
     try {
-      const res = await fetch("/api/v1/auth/login", {
+      const res = await fetch(`${APIURL}/api/v1/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -29,7 +30,7 @@ const Login = () => {
     } catch (error) {
       console.log("Error 404", error);
     }
-  };
+  }
 
   return (
     <div className="body-login">

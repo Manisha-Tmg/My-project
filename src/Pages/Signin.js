@@ -33,7 +33,6 @@ const Signin = () => {
     try {
       const res = await fetch(`${APIURL}/api/v1/auth/register`, {
         method: "POST",
-        // mode: "no-cors",
         headers: {
           "content-type": "application/json",
           Accept: "application/json",

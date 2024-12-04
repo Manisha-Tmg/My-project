@@ -56,7 +56,7 @@ const Complain = () => {
       </div>
       <Link to={"/form"}>
         <button className="next-button" onClick={handleSubmit}>
-          NEXT
+          Step 1
         </button>
       </Link>
     </div>

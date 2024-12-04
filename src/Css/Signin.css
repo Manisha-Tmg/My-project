@@ -9,12 +9,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 70px); /* Adjust according to navbar height */
+  min-height: calc(100vh - 70px);
   margin-top: 79px;
 }
 
 .form-sign {
-  /* background-color: #ffffff; */
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -49,11 +48,6 @@
   border-color: #000000;
 }
 
-/* .form-control:focus { */
-/* border-color: #e82f22;npm */
-/* outline: none;
-} */
-
 .btn11 {
   background-color: #e82f22;
   border: 2px solid #e82f22;
@@ -70,7 +64,6 @@
 
 .btn11:hover {
   background-color: #930c03;
-  /* border: 2px solid #e82f22; */
 }
 
 .account1 {
