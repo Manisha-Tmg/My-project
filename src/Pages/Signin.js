@@ -1,7 +1,11 @@
 import { React, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../Css/Signin.css";
+import { FaRegEye } from "react-icons/fa";
+import { FaRegEyeSlash } from "react-icons/fa";
 import { APIURL } from "../env";
+import { set } from "zod";
+import { specialChars } from "@testing-library/user-event";
 
 const Signin = () => {
   const [fullname, setFullname] = useState("");
@@ -13,11 +17,49 @@ const Signin = () => {
   const [location, setLocation] = useState("");
   const [Primarycontact, setPrimarycontact] = useState("");
   const [Secondarycontact, setSecondarycontact] = useState("");
+  const [showHide, setShowHide] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const navigate = useNavigate();
+  const handleValidation = () => {
+    const newErrors = {
+      fullname: !fullname,
+      email: !email,
+      password: !password,
+      state: !state,
+      tole: !tole,
+      ward: !ward,
+      location: !location,
+      Primarycontact: !Primarycontact || Primarycontact <= 0,
+      Secondarycontact: !Secondarycontact || Secondarycontact <= 0,
+    };
+    setErrors(newErrors);
+    return Object.values(newErrors).every((errors) => !errors);
+  };
+
+  const isButtonDisabled = Object.values({
+    fullname,
+    email,
+    password,
+    state,
+    tole,
+    ward,
+    location,
+    Primarycontact,
+    Secondarycontact,
+  }).some((value) => !value);
 
   async function handleSignup(event) {
     event.preventDefault();
+    if (Primarycontact < 0) {
+      alert("Numbers cannot be negative");
+    }
+    // } else {
+    //   return;
+    // }
+    if (!handleValidation()) {
+      return;
+    }
     console.log(
       "button clicked",
       fullname,
@@ -75,7 +117,8 @@ const Signin = () => {
             placeholder="Enter your full name"
             value={fullname}
             onChange={(e) => setFullname(e.target.value)}
-            required
+
+            // required
           />
         </div>
         <div className="m-3">
@@ -89,28 +132,36 @@ const Signin = () => {
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
+            // required
           />
         </div>
         <div className="m-3">
           <label htmlFor="password" className="form-label">
             Password
           </label>
+
           <input
-            type="password"
+            type={showHide ? "text" : "password"}
             className="form-control"
             id="password"
             placeholder="Enter your password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
+            // required
           />
+          <button
+            type="text"
+            className="btneye"
+            onClick={() => setShowHide(!showHide)}
+          >
+            {showHide ? <FaRegEye /> : <FaRegEyeSlash />}
+          </button>
         </div>
         {/* Address Section */}
         <h3 className="h-22">Address Information</h3>
         <div className="m-3">
           <label htmlFor="state" className="form-label">
-            State
+            Province
           </label>
           <input
             type="text"
@@ -119,7 +170,7 @@ const Signin = () => {
             placeholder="Enter your state"
             value={state}
             onChange={(e) => setState(e.target.value)}
-            required
+            // required
           />
         </div>
         <div className="m-3">
@@ -133,7 +184,7 @@ const Signin = () => {
             placeholder="Enter your municipality"
             value={tole}
             onChange={(e) => setTole(e.target.value)}
-            required
+            // required
           />
         </div>
         <div className="m-3">
@@ -147,7 +198,7 @@ const Signin = () => {
             placeholder="Enter your ward"
             value={ward}
             onChange={(e) => setWard(e.target.value)}
-            required
+            // required
           />
         </div>
         <div className="m-3">
@@ -161,12 +212,12 @@ const Signin = () => {
             placeholder="Enter your exact location"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            required
+            // required
           />
         </div>
         <div className="m-3">
           <label htmlFor="contact" className="form-label">
-            Primarycontact
+            Primary Contact
           </label>
           <input
             type="tel"
@@ -175,12 +226,12 @@ const Signin = () => {
             placeholder="Enter your contact number"
             value={Primarycontact}
             onChange={(e) => setPrimarycontact(e.target.value)}
-            required
+            // required
           />
         </div>{" "}
         <div className="m-3">
           <label htmlFor="contact" className="form-label">
-            Secondarycontact
+            Secondary Contact
           </label>
           <input
             type="tel"
@@ -189,10 +240,19 @@ const Signin = () => {
             placeholder="Enter your contact number"
             value={Secondarycontact}
             onChange={(e) => setSecondarycontact(e.target.value)}
-            required
+            // required
           />
         </div>
-        <button type="submit" className="btn11" onClick={handleSignup}>
+        <button
+          type="submit"
+          className="btn11"
+          disabled={isButtonDisabled}
+          //  onClick={handleSignup}
+          style={{
+            backgroundColor: isButtonDisabled ? "gray" : "#e82f22",
+            cursor: isButtonDisabled ? "not-allowed" : "pointer",
+          }}
+        >
           Sign In
         </button>
         <label className="account1">
