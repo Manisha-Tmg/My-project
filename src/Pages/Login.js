@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../Css/Login.css";
+import { FaRegEye } from "react-icons/fa";
+import { FaRegEyeSlash } from "react-icons/fa";
 import { APIURL } from "../env";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showHide, setShowHide] = useState(false);
   const navigate = useNavigate();
 
   async function handleLogin(event) {
@@ -56,7 +59,7 @@ const Login = () => {
             Password
           </label>
           <input
-            type="password"
+            type={showHide ? "text" : "password"}
             className="logform-control"
             id="exampleInputPassword1"
             value={password}
@@ -64,6 +67,13 @@ const Login = () => {
             required
           />
         </div>
+        <button
+          type="button"
+          className="eyebutton"
+          onClick={() => setShowHide(!showHide)}
+        >
+          {showHide ? <FaRegEye /> : <FaRegEyeSlash />}
+        </button>
 
         <div className="remember-forgot">
           <Link id="forgot" to={"/forgot"}>
