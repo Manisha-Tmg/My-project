@@ -4,8 +4,6 @@ import "../Css/Signin.css";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { APIURL } from "../env";
-import { set } from "zod";
-import { specialChars } from "@testing-library/user-event";
 
 const Signin = () => {
   const [fullname, setFullname] = useState("");
@@ -34,7 +32,7 @@ const Signin = () => {
       Secondarycontact: !Secondarycontact || Secondarycontact <= 0,
     };
     setErrors(newErrors);
-    return Object.values(newErrors).every((errors) => !errors);
+    return Object.values(newErrors).every((error) => !error);
   };
 
   const isButtonDisabled = Object.values({

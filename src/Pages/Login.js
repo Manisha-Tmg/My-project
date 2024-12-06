@@ -25,6 +25,9 @@ const Login = () => {
 
       const userData = await res.json();
       if (userData.success) {
+        setEmail("");
+        setPassword("");
+        localStorage.getItem("token", data.token);
         alert("Login successful");
         navigate("/home");
       } else {
