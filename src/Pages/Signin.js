@@ -91,6 +91,7 @@ const Signin = () => {
       });
       const userData = await res.json();
       if (userData.success) {
+        localStorage.setItem("user", JSON.stringify(userData));
         alert("User created sucessfully");
         navigate("/login");
       } else {

@@ -22,16 +22,20 @@ const Login = () => {
         },
         body: JSON.stringify({ email, password }),
       });
-
+      const storedUser = JSON.parse(localStorage.getItem("user"));
       const userData = await res.json();
-      if (userData.success) {
-        setEmail("");
-        setPassword("");
-        localStorage.getItem("token", userData.token);
+      if (
+        storedUser &&
+        storedUser.email === email &&
+        storedUser.password === password
+      ) {
+        // setEmail("");
+        // setPassword("");
+
         alert("Login successful");
-        navigate("/home");
+        navigate("/");
       } else {
-        alert(userData.message);
+        alert(userData.message, "Invalid email and password");
       }
     } catch (error) {
       console.log("Error 404", error);
