@@ -1,6 +1,7 @@
 import React from "react";
 import "../Css/Profile.css";
 import { useState, useEffect } from "react";
+import { APIURL } from "../env";
 
 const Profile = ({ user }) => {
   const [userData, setUserData] = useState("");
@@ -9,7 +10,7 @@ const Profile = ({ user }) => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch("", {
+        const response = await fetch(`${APIURL}/api/v1/user/profile`, {
           method: "GET",
           headers: {},
         });

@@ -14,31 +14,31 @@ const Login = () => {
   async function handleLogin(event) {
     event.preventDefault();
     console.log("button clicked", email, password);
+
     try {
-      const res = await fetch(`${APIURL}/api/v1//auth/login`, {
+      const res = await fetch(`${APIURL}/api/v1/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify({ email, password }),
       });
-      const storedUser = JSON.parse(localStorage.getItem("user"));
-      const userData = await res.json();
-      if (
-        storedUser &&
-        storedUser.email === email &&
-        storedUser.password === password
-      ) {
-        // setEmail("");
-        // setPassword("");
 
+      const userData = await res.json();
+
+      if (userData.success) {
+        localStorage.setItem("token", userData.token);
+        localStorage.getItem("email", email);
+        localStorage.getItem("password", password);
         alert("Login successful");
         navigate("/");
       } else {
-        alert(userData.message, "Invalid email and password");
+        alert("Invalid email or password");
       }
     } catch (error) {
       console.log("Error 404", error);
+      alert("An error occurred during login. Please try again.");
     }
   }
 
@@ -88,7 +88,7 @@ const Login = () => {
           </Link>
         </div>
 
-        <button className="logbutton" type="submit" onClick={handleLogin}>
+        <button className="logbutton" type="submit">
           Login
         </button>
 
