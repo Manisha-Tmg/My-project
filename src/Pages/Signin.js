@@ -91,8 +91,17 @@ const Signin = () => {
       });
       const userData = await res.json();
       if (userData.success) {
-        localStorage.setItem("user", JSON.stringify(userData));
         alert("User created sucessfully");
+        setFullname("");
+        setEmail("");
+        setPassword("");
+        setState("");
+        setTole("");
+        setWard("");
+        setLocation("");
+        setPrimarycontact("");
+        setSecondarycontact("");
+
         navigate("/login");
       } else {
         alert(userData.message);

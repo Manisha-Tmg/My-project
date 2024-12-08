@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../Css/Navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const [isLogin, setIsLogin] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const myToken = localStorage.getItem("token");
+    if (myToken) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+      navigate("/login");
+    }
+  }, [navigate]);
+
+  const handleLogout = () => {
+    const confirmCheck = window.confirm("Are you sure want to logout?");
+    if (confirmCheck) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("accessToken");
+      setIsLogin(false);
+      navigate("/login");
+    }
+  };
+
   return (
     <div>
       <nav className="navbar">
@@ -11,20 +34,30 @@ const Navbar = () => {
           <div className="logo">Sewa</div>
         </div>
         <ul className="nav-links">
-          <Link to={"/"}>
-            <li>Home</li>
-          </Link>
-          <Link to={"/contact"}>
-            <li className="contact">Contact</li>
-          </Link>
-          <Link to={"/Aboutus"}>
-            <li className="about">About Us</li>
-          </Link>{" "}
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/contact" className="contact">
+              Contact
+            </Link>
+          </li>
+          <li>
+            <Link to="/aboutus" className="about">
+              About Us
+            </Link>
+          </li>
         </ul>
         <div className="auth-btns">
-          <Link to={"/login"}>
-            <button className="btn1">Log In</button>
-          </Link>
+          {isLogin ? (
+            <button onClick={handleLogout} className="btn1">
+              Log Out
+            </button>
+          ) : (
+            <Link to="/login">
+              <button className="btn1">Log In</button>
+            </Link>
+          )}
         </div>
       </nav>
     </div>

@@ -10,12 +10,13 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [showHide, setShowHide] = useState(false);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   async function handleLogin(event) {
     event.preventDefault();
-    console.log("button clicked", email, password);
 
     try {
+      setLoading(true);
       const res = await fetch(`${APIURL}/api/v1/auth/login`, {
         method: "POST",
         headers: {
@@ -26,17 +27,22 @@ const Login = () => {
       });
 
       const userData = await res.json();
+      console.log(userData);
 
       if (userData.success) {
-        localStorage.setItem("token", userData.token);
-        localStorage.getItem("email", email);
-        localStorage.getItem("password", password);
-        alert("Login successful");
+        setLoading(false);
+        alert(userData.message);
+        setEmail("");
+        setPassword("");
+        localStorage.setItem("accessToken", userData.data.accessToken);
+        localStorage.setItem("token", userData.data.token);
         navigate("/");
       } else {
-        alert("Invalid email or password");
+        alert(userData.message);
+        setLoading(false);
       }
     } catch (error) {
+      setLoading(false);
       console.log("Error 404", error);
       alert("An error occurred during login. Please try again.");
     }
@@ -88,8 +94,8 @@ const Login = () => {
           </Link>
         </div>
 
-        <button className="logbutton" type="submit">
-          Login
+        <button className="logbutton" type="submit" disabled={loading}>
+          {loading ? "Logging in..." : "Login"}
         </button>
 
         <label className="account" htmlFor="exampleCheck1">
