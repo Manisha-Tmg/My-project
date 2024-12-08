@@ -36,7 +36,6 @@ const Form = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Response from API:", data);
         alert("Complaint submitted successfully!");
       } else {
         const errorData = await response.json();

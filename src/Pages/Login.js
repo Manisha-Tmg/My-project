@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../Css/Login.css";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
@@ -27,7 +27,6 @@ const Login = () => {
       });
 
       const userData = await res.json();
-      console.log(userData);
 
       if (userData.success) {
         setLoading(false);
@@ -43,7 +42,6 @@ const Login = () => {
       }
     } catch (error) {
       setLoading(false);
-      console.log("Error 404", error);
       alert("An error occurred during login. Please try again.");
     }
   }

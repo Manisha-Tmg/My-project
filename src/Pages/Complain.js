@@ -31,7 +31,6 @@ const Complain = () => {
       }
 
       const data = await response.json();
-      console.log("API Response:", data);
       alert("Complaint submitted successfully!");
     } catch (error) {
       console.error("Error submitting the complaint:", error);

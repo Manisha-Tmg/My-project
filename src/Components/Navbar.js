@@ -1,20 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import "../Css/Navbar.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isLogin, setIsLogin] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const signUpLocation = location.pathname;
 
   useEffect(() => {
     const myToken = localStorage.getItem("token");
-    if (myToken) {
+    if (myToken && signUpLocation !== "/signin") {
       setIsLogin(true);
     } else {
       setIsLogin(false);
-      navigate("/login");
+      if (signUpLocation !== "/signin") {
+        navigate("/login"); // Redirect to login page only if not on /signin
+      }
     }
-  }, [navigate]);
+  }, [navigate, signUpLocation]);
 
   const handleLogout = () => {
     const confirmCheck = window.confirm("Are you sure want to logout?");

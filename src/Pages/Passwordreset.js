@@ -9,13 +9,11 @@ const Passwordreset = () => {
 
   const handlePassword = async (event) => {
     event.preventDefault();
-    console.log("Button clicked", password, confirmpassword);
     if (password === confirmpassword) {
       alert("Your password was sucessfully changed");
-      console.log("Your password is same");
       navigate("/login");
     } else {
-      console.log("Please check your password");
+      alert("Please check your password");
     }
   };
   return (

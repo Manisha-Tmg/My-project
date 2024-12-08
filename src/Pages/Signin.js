@@ -58,18 +58,7 @@ const Signin = () => {
     if (!handleValidation()) {
       return;
     }
-    console.log(
-      "button clicked",
-      fullname,
-      email,
-      password,
-      state,
-      tole,
-      ward,
-      location,
-      Primarycontact,
-      Secondarycontact
-    );
+
     try {
       const res = await fetch(`${APIURL}/api/v1/auth/register`, {
         method: "POST",
