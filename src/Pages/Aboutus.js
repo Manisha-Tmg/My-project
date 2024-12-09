@@ -1,6 +1,7 @@
 import React from "react";
 import "../Css/Aboutus.css";
 import Footer from "../Components/Footer";
+import image from "../assets/complaint-mgmt.png";
 
 const Aboutus = () => {
   return (
@@ -44,7 +45,7 @@ const Aboutus = () => {
           </div>
           <div className="right-side">
             <img
-              src="https://via.placeholder.com/400"
+              src={image}
               alt="About Samasya Sewa"
               className="about-us-image"
             />

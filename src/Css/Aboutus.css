@@ -35,7 +35,7 @@
 }
 
 .about-us-image {
-  width: 40%;
+  width: 50%;
   height: auto;
   border-radius: 8px;
 }
@@ -54,4 +54,7 @@
 
 .about-logo {
   color: #e82f22;
+}
+p {
+  font-weight: 105;
 }

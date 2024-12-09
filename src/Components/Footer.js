@@ -13,8 +13,6 @@ import {
 function Footer() {
   return (
     <div className="page-container">
-      <div className="content"> </div>
-
       <footer className="footer">
         <div className="footer-section quick-links">
           <h1 className="footer-title">Quick Links</h1>
