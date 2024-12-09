@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Css/Navbar.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
@@ -39,7 +39,7 @@ const Navbar = () => {
         </div>
         <ul className="nav-links">
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/complain">Home</Link>
           </li>
           <li>
             <Link to="/contact" className="contact">

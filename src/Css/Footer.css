@@ -4,20 +4,17 @@
   box-sizing: border-box;
 }
 
-body,
-html {
-  height: 100%;
-}
-
 .page-container {
   display: flex;
   flex-direction: column;
+
   min-height: 100vh;
 }
 
 .content {
-  flex: 1;
-  padding: 20px;
+  flex: 2;
+  /* padding: 20px; */
+  margin-top: 0;
 }
 
 .footer {
@@ -26,6 +23,7 @@ html {
   color: #000000;
   padding: 20px 50px;
   font-size: 14px;
+  flex-shrink: 0;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
 }
 

@@ -1,5 +1,6 @@
 import React from "react";
 import "../Css/Aboutus.css";
+import Footer from "../Components/Footer";
 
 const Aboutus = () => {
   return (
@@ -18,36 +19,27 @@ const Aboutus = () => {
             </div>
 
             <p>
-              Lorem ipsum odor amet, consectetuer adipiscing elit. Ipsum mattis
-              sociosqu tempus ante morbi. Himenaeos vel quis id ipsum inceptos
-              montes sociosqu. Praesent tortor parturient potenti quam, leo mi.
-              Efficitur egestas per mus erat integer, natoque ligula pretium.
-              Commodo id quisque pharetra, sapien ultrices faucibus. Eget
-              bibendum a; ad habitant maecenas ornare. Torquent fames purus
-              justo aptent ligula magna vestibulum senectus mollis. Risus dictum
-              habitasse cubilia elit tellus ullamcorper a. Blandit famei,
-              aliquet non felis molestie. Varius primis etiam pulvinar; ante
-              rhoncus porta sapien praesent cras. Malesuada volutpat donec purus
-              porttitor dui penatibus. Elementum vulputate condimentum odio
-              accumsan, integer interdum. Torquent condimentum dictum nibh nec
-              quisque. Venenatis laoreet dignissim posuere hendrerit, et
-              efficitur auctor.
+              Welcome to Samasyasewa, a platform dedicated to addressing
+              community issues with efficiency and transparency. We are
+              committed to empowering individuals and communities by providing a
+              streamlined system to report complaints, track their resolution,
+              and foster accountability. Recognizing the challenges faced in
+              resolving everyday problems like infrastructure concerns and
+              public services, Samasyasewa bridges the gap between citizens and
+              relevant authorities through a user-friendly, tech-driven
+              approach.
             </p>
 
             <br />
 
             <p>
-              Lorem ipsum odor amet, consectetuer adipiscing elit. Ipsum mattis
-              sociosqu tempus ante morbi. Himenaeos vel quis id ipsum inceptos
-              montes sociosqu. Praesent tortor parturient potenti quam, leo mi.
-              Efficitur egestas per mus erat integer, natoque ligula pretium.
-              Commodo id quisque pharetra, sapien ultrices faucibus. Eget
-              bibendum a; ad habitant maecenas ornare. Torquent fames purus
-              justo aptent ligula magna vestibulum senectus mollis. Risus dictum
-              habitasse cubilia elit tellus ullamcorper a. Blandndimentum odio
-              accumsan, integer interdum. Torquent condimentum dictum nibh nec
-              quisque. Venenatis laoreet dignissim posuere hendrerit, et
-              efficitur auctor.
+              Our mission is to simplify the complaint management process,
+              ensuring that voices are heard and solutions are implemented
+              effectively. By promoting collaboration, innovation, and
+              transparency, we aim to create stronger, more connected
+              communities where problems are resolved promptly. At Samasyasewa,
+              we believe every issue deserves attention and every voice matters.
+              Together, let’s build a better community—one step at a time.
             </p>
           </div>
           <div className="right-side">
@@ -59,6 +51,7 @@ const Aboutus = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

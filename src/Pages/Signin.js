@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../Css/Signin.css";
 import { FaRegEye } from "react-icons/fa";
@@ -96,9 +96,13 @@ const Signin = () => {
         alert(userData.message);
       }
     } catch (error) {
-      console.log("errorrrr 404", error);
+      alert("errorrrr 404", error);
     }
   }
+  const [errorMsg, setErrorMsg] = useState("");
+  useEffect(() => {
+    setErrorMsg("");
+  });
   return (
     <div className="body-signin" onSubmit={handleSignup}>
       <form className="form-sign">

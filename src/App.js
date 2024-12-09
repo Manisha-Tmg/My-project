@@ -17,7 +17,7 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Complain />} />
+        <Route path="/complain" element={<Complain />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
@@ -26,7 +26,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/forgot" element={<Passwordreset />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </Router>
   );
 }

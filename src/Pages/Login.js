@@ -35,7 +35,7 @@ const Login = () => {
         setPassword("");
         localStorage.setItem("accessToken", userData.data.accessToken);
         localStorage.setItem("token", userData.data.token);
-        navigate("/");
+        navigate("/complain");
       } else {
         alert(userData.message);
         setLoading(false);

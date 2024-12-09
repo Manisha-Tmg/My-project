@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../Css/Complain.css";
 import { Link } from "react-router-dom";
+import Footer from "../Components/Footer";
 
 const Complain = () => {
   const [selectedGrievance, setSelectedGrievance] = useState("");
@@ -39,25 +40,28 @@ const Complain = () => {
   };
 
   return (
-    <div className="Complainform-container" onSubmit={handleChange}>
-      <button className="register-button">Register a Complaint</button>
-      <div className="form-group">
-        <label className="label1">Select the Grievance Type</label>
-        <select
-          className="type"
-          value={selectedGrievance}
-          onChange={handleChange}
-        >
-          <option value="">-</option>
-          <option value="type1">Disaster</option>
-          <option value="type2">2</option>
-        </select>
+    <div>
+      <div className="Complainform-container" onSubmit={handleChange}>
+        <button className="register-button">Register a Complaint</button>
+        <div className="form-group">
+          <label className="label1">Select the Grievance Type</label>
+          <select
+            className="type"
+            value={selectedGrievance}
+            onChange={handleChange}
+          >
+            <option value="">-</option>
+            <option value="type1">Disaster</option>
+            <option value="type2">2</option>
+          </select>
+        </div>
+        <Link to={"/form"}>
+          <button className="next-button" onClick={handleSubmit}>
+            Step 1
+          </button>
+        </Link>
       </div>
-      <Link to={"/form"}>
-        <button className="next-button" onClick={handleSubmit}>
-          Step 1
-        </button>
-      </Link>
+      <Footer />
     </div>
   );
 };
