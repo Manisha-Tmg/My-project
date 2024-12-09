@@ -15,7 +15,7 @@ const Navbar = () => {
     } else {
       setIsLogin(false);
       if (signUpLocation !== "/signin") {
-        navigate("/login"); // Redirect to login page only if not on /signin
+        navigate("/login"); // Redirect to login page only if not on /signin page
       }
     }
   }, [navigate, signUpLocation]);

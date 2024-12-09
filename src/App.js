@@ -1,11 +1,8 @@
-import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 import Aboutus from "./Pages/Aboutus";
-// import AboutUs from "./Pages/AboutUs";
 import Complain from "./Pages/Complain";
 import Contact from "./Pages/Contact";
 import Form from "./Pages/Form";
-// import Contact from "./Pages/Contact";
 import Login from "./Pages/Login";
 import Passwordreset from "./Pages/Passwordreset";
 import Profile from "./Pages/Profile";
@@ -25,6 +22,7 @@ function App() {
         <Route path="/form" element={<Form />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/forgot" element={<Passwordreset />} />
+        {/* <Route path="/complain" element={<Home />} /> */}
       </Routes>
       {/* <Footer /> */}
     </Router>

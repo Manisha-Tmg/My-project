@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "../Css/Form.css";
+import { APIURL } from "../env";
+import { useNavigate } from "react-router-dom";
 
 const Form = () => {
   const [district, setDistrict] = useState("");
@@ -10,9 +12,20 @@ const Form = () => {
   const [province, setProvince] = useState("");
   const [complainTitle, setComplainTitle] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(false);
+  const navigate = useNavigate();
 
-  const handleFormSubmit = async (e) => {
+  async function handleFormSubmit(e) {
     e.preventDefault();
+    console.log(
+      complainTitle,
+      district,
+      province,
+      tole,
+      wardNumber,
+      location,
+      description,
+      isAnonymous
+    );
 
     const formData = {
       complainTitle,
@@ -24,9 +37,8 @@ const Form = () => {
       description,
       isAnonymous,
     };
-
     try {
-      const response = await fetch("", {
+      const response = await fetch(`${APIURL}/api/v1/complaint`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,19 +46,18 @@ const Form = () => {
         body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
-        const data = await response.json();
+      const data = await response.json();
+      if (data.success) {
         alert("Complaint submitted successfully!");
+        navigate("/complain");
       } else {
-        const errorData = await response.json();
-        console.error("Error response:", errorData);
         alert("Failed to submit the complaint.");
       }
     } catch (error) {
       console.error("Error submitting the complaint:", error);
       alert("An error occurred. Please try again.");
     }
-  };
+  }
 
   return (
     <div className="form-main">

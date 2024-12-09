@@ -1,21 +1,19 @@
 import React, { useState } from "react";
 import "../Css/Complain.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer";
 
 const Complain = () => {
   const [selectedGrievance, setSelectedGrievance] = useState("");
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setSelectedGrievance(e.target.value);
-  };
-
-  const handleSubmit = async () => {
-    if (!selectedGrievance) {
-      alert("Please select a grievance type before submitting.");
-      return;
-    }
-
+  async function handleSubmit(event) {
+    event.preventDefault();
+    console.log(selectedGrievance);
+    // if (!selectedGrievance) {
+    //   alert("Please select a grievance type before submitting.");
+    //   return;
+    // }
     try {
       const response = await fetch("", {
         method: "POST",
@@ -23,36 +21,39 @@ const Complain = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          grievanceType: selectedGrievance,
+          selectedGrievance,
         }),
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to submit the complaint");
-      }
-
       const data = await response.json();
-      alert("Complaint submitted successfully!");
+      if (data.success) {
+        alert("Complaint submitted successfully!");
+        // navigate("/form");
+      } else {
+        alert("please select the type");
+        navigate("/form");
+      }
     } catch (error) {
-      console.error("Error submitting the complaint:", error);
       alert("Failed to submit the complaint. Please try again.");
     }
-  };
+  }
 
   return (
     <div>
-      <div className="Complainform-container" onSubmit={handleChange}>
+      <div className="Complainform-container" onSubmit={handleSubmit}>
         <button className="register-button">Register a Complaint</button>
         <div className="form-group">
           <label className="label1">Select the Grievance Type</label>
           <select
             className="type"
             value={selectedGrievance}
-            onChange={handleChange}
+            onChange={(e) => setSelectedGrievance(e.target.value)}
           >
-            <option value="">-</option>
-            <option value="type1">Disaster</option>
-            <option value="type2">2</option>
+            <option value="Natural Disasters">Natural Disasters</option>
+            <option value="Man-Made Disasters">Man-Made Disasters</option>
+            <option value="Environmental Disasters">
+              Environmental Disasters
+            </option>
           </select>
         </div>
         <Link to={"/form"}>
