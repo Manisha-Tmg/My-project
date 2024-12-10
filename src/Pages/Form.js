@@ -46,8 +46,10 @@ const Form = () => {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
-      if (data.success) {
+      const udata = await response.json();
+      if (udata.success) {
+        localStorage.setItem("accessToken", udata.data.accessToken);
+        localStorage.setItem("token", udata.data.token);
         alert("Complaint submitted successfully!");
         navigate("/complain");
       } else {

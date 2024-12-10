@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../Css/Complain.css";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer";
+import { APIURL } from "../env";
 
 const Complain = () => {
   const [selectedGrievance, setSelectedGrievance] = useState("");
@@ -10,12 +11,9 @@ const Complain = () => {
   async function handleSubmit(event) {
     event.preventDefault();
     console.log(selectedGrievance);
-    // if (!selectedGrievance) {
-    //   alert("Please select a grievance type before submitting.");
-    //   return;
-    // }
+
     try {
-      const response = await fetch("", {
+      const response = await fetch(`${APIURL}/api/v1/complaint`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -28,13 +26,12 @@ const Complain = () => {
       const data = await response.json();
       if (data.success) {
         alert("Complaint submitted successfully!");
-        // navigate("/form");
+        navigate("/form");
       } else {
         alert("please select the type");
-        navigate("/form");
       }
     } catch (error) {
-      alert("Failed to submit the complaint. Please try again.");
+      alert(error.message);
     }
   }
 
