@@ -1,21 +1,30 @@
 import React, { useState } from "react";
 import "../Scss/forgot.scss";
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
+import { APIURL } from "../env";
+import { Type } from "lucide-react";
 
 const Passwordreset = () => {
   const [password, setPassword] = useState("");
   const [confirmpassword, setconfirmpassword] = useState("");
   const navigate = useNavigate();
 
-  const handlePassword = async (event) => {
+  async function handlePassword(event) {
     event.preventDefault();
     if (password === confirmpassword) {
-      alert("Your password was sucessfully changed");
-      navigate("/login");
-    } else {
-      alert("Please check your password");
+      try {
+        const response = await fetch(`${APIURL}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ password }),
+        });
+      } catch (error) {
+        alert(error);
+      }
     }
-  };
+  }
   return (
     <div className="password-reset-container" onSubmit={handlePassword}>
       <h1 className="password-reset-title">Password Reset</h1>
