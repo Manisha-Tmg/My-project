@@ -7,18 +7,25 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const signUpLocation = location.pathname;
+  const otpLocation = location.pathname;
+  const forgotLocation = location.pathname;
 
   useEffect(() => {
-    const reload = (e) => {
-      e.preventDefault(false);
-    };
-
     const myToken = localStorage.getItem("token");
-    if (myToken && signUpLocation !== "/signin") {
+    if (
+      myToken &&
+      signUpLocation !== "/signin" &&
+      otpLocation !== "/otp" &&
+      forgotLocation !== "/forgot"
+    ) {
       setIsLogin(true);
     } else {
       setIsLogin(false);
-      if (signUpLocation !== "/signin") {
+      if (
+        signUpLocation !== "/signin" &&
+        otpLocation !== "/otp" &&
+        forgotLocation !== "/forgot"
+      ) {
         navigate("/login"); // Redirect to login page only if not on /signin page
       }
     }

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import "../Css/otp.css";
+import { APIURL } from "../env";
 
 const Otppage = () => {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
@@ -10,21 +12,38 @@ const Otppage = () => {
       const newotp = [...otp];
       newotp[index] = value;
       setOtp(newotp);
-      if (value !== "" && e.target.nextSibling) {
-        e.target.nextSibling.onFocus();
+      // Focus on the next input if exists
+      const nextInput = e.target.nextSibling;
+      if (value !== "" && nextInput) {
+        nextInput.focus();
       }
     }
   };
 
-  const handlesub = (e) => {
+  async function handlesub(e) {
     e.preventDefault();
-    const enteredOtp = otp.join(""); //to join all otp
+    const enteredOtp = otp.join(""); // Combine all OTP parts into a single string
     if (enteredOtp.length === 6) {
-      setMsg(`otp sunmitted :${enteredOtp}`);
-    } else {
-      setMsg("try again");
+      try {
+        const response = await fetch(`${APIURL}/api/v1/auth/verify-user`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "apllication/json",
+          },
+          body: JSON.stringify({ otp: enteredOtp }),
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setMsg(`otp verified:${data.message}`);
+        } else {
+          const errormessage = await response.json();
+          setMsg(`error occured ${errormessage.message}`);
+        }
+      } catch (error) {
+        alert(error);
+      }
     }
-  };
+  }
   return (
     <div className="otp-page">
       <h2>Enter OTP</h2>
@@ -32,10 +51,11 @@ const Otppage = () => {
         <div className="otp-inputs">
           {otp.map((value, index) => (
             <input
-              type="numbers"
+              key={index}
+              type="text"
               maxLength="1"
               value={value}
-              onChange={(e) => handleChange(e.target, index)}
+              onChange={(e) => handleChange(e, index)}
               onFocus={(e) => e.target.select()}
               className="otp-input"
             />

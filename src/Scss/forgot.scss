@@ -1,8 +1,9 @@
-$background-color: #18965f;
-$primary-color: #ffffff;
+$background-color: #0e2f3c;
+
+$button-color: #a02219;
 $font: arial, sans-serif;
-$border: 2px solid #18965f;
 $border-radius: 5px;
+$border: 2px solid #a02219;
 
 .password-reset-container {
   display: flex;
@@ -10,20 +11,20 @@ $border-radius: 5px;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: $primary-color;
+  background-color: $background-color;
   padding: 20px;
 }
 .password-reset-title {
   font-size: 2rem;
-  color: #333;
+  color: #ffffff;
   margin-bottom: 20px;
 }
 .password-input {
   padding: 12px;
   margin-bottom: 15px;
-  border: $border;
-  border-radius: $border-radius;
   font-size: 1rem;
+  border-radius: $border-radius;
+  border: 2px solid rgb(123, 123, 123);
 }
 .password-reset-form {
   display: flex;
@@ -37,11 +38,10 @@ $border-radius: 5px;
   padding: 15px 15px 15px 15px;
   font-weight: bold;
   display: flex;
-  border-radius: $border-radius;
-  border: $border;
-  background-color: $background-color;
-  color: $primary-color;
+  background-color: $button-color;
   font-weight: bold;
   align-content: center;
+  border: $border;
+  border-radius: $border-radius;
   justify-content: center;
 }
