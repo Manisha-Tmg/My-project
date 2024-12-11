@@ -37,11 +37,13 @@ const Form = () => {
       description,
       isAnonymous,
     };
+    const accessToken = localStorage.getItem("accessToken");
     try {
       const response = await fetch(`${APIURL}/api/v1/complaint`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify(formData),
       });
@@ -57,7 +59,7 @@ const Form = () => {
       }
     } catch (error) {
       console.error("Error submitting the complaint:", error);
-      alert("An error occurred. Please try again.");
+      alert(error);
     }
   }
 

@@ -5,6 +5,7 @@
   font-family: sans-serif;
   /* color: #fbfdfd; Text */
   /* background-color: #ef1105; button*/
+  text-decoration: none;
 }
 .navbar {
   width: 100%;
@@ -55,7 +56,6 @@
   color: rgb(255, 249, 249);
   font-weight: bold;
   cursor: pointer;
-  text-decoration: underline;
 }
 
 .nav-links li:hover {

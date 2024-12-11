@@ -9,6 +9,10 @@ const Navbar = () => {
   const signUpLocation = location.pathname;
 
   useEffect(() => {
+    const reload = (e) => {
+      e.preventDefault(false);
+    };
+
     const myToken = localStorage.getItem("token");
     if (myToken && signUpLocation !== "/signin") {
       setIsLogin(true);
@@ -39,12 +43,30 @@ const Navbar = () => {
         </div>
         <ul className="nav-links">
           <li>
-            <Link to="/complain">Home</Link>
+            {isLogin ? (
+              <Link to="/complain">Home</Link>
+            ) : (
+              <span to="/complain" style={{ cursor: "not-allowed" }}>
+                Home
+              </span>
+            )}
           </li>
+
           <li>
-            <Link to="/contact" className="contact">
-              Contact
-            </Link>
+            {" "}
+            {isLogin ? (
+              <Link to="/contact" className="contact">
+                Contact
+              </Link>
+            ) : (
+              <span
+                to="/contact"
+                className="contact"
+                style={{ cursor: "not-allowed" }}
+              >
+                Contact
+              </span>
+            )}
           </li>
           <li>
             <Link to="/aboutus" className="about">

@@ -4,6 +4,7 @@ import Complain from "./Pages/Complain";
 import Contact from "./Pages/Contact";
 import Form from "./Pages/Form";
 import Login from "./Pages/Login";
+import Otppage from "./Pages/Otppage";
 import Passwordreset from "./Pages/Passwordreset";
 import Profile from "./Pages/Profile";
 import Signin from "./Pages/Signin";
@@ -22,7 +23,7 @@ function App() {
         <Route path="/form" element={<Form />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/forgot" element={<Passwordreset />} />
-        {/* <Route path="/complain" element={<Home />} /> */}
+        <Route path="/otp" element={<Otppage />} />
       </Routes>
       {/* <Footer /> */}
     </Router>

@@ -11,9 +11,8 @@ const Complain = () => {
   async function handleSubmit(event) {
     event.preventDefault();
     console.log(selectedGrievance);
-
     try {
-      const response = await fetch(`${APIURL}/api/v1/complaint`, {
+      const response = await fetch(`${APIURL}/api`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
