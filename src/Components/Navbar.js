@@ -46,7 +46,10 @@ const Navbar = () => {
             {isLogin ? (
               <Link to="/complain">Home</Link>
             ) : (
-              <span to="/complain" style={{ cursor: "not-allowed" }}>
+              <span
+                to="/complain"
+                // style={{ cursor: "not-allowed" }}
+              >
                 Home
               </span>
             )}
@@ -62,16 +65,22 @@ const Navbar = () => {
               <span
                 to="/contact"
                 className="contact"
-                style={{ cursor: "not-allowed" }}
+                // style={{ cursor: "not-allowed" }}
               >
                 Contact
               </span>
             )}
           </li>
           <li>
-            <Link to="/aboutus" className="about">
-              About Us
-            </Link>
+            {isLogin ? (
+              <Link to="/aboutus" className="about">
+                About Us
+              </Link>
+            ) : (
+              <span to="/aboutus" className="about">
+                About Us
+              </span>
+            )}
           </li>
         </ul>
         <div className="auth-btns">
