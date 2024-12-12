@@ -29,6 +29,7 @@ const Otppage = () => {
           method: "POST",
           headers: {
             "Content-Type": "apllication/json",
+            Accept: "application/json",
           },
           body: JSON.stringify({ otp: enteredOtp }),
         });

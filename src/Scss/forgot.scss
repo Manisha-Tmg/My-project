@@ -20,6 +20,10 @@ $border: 2px solid #a02219;
   margin-bottom: 20px;
 }
 .password-input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
   padding: 12px;
   margin-bottom: 15px;
   font-size: 1rem;
@@ -34,6 +38,8 @@ $border: 2px solid #a02219;
 }
 
 .submit-button {
+  width: 100%;
+  max-width: 400px;
   padding: 15px 15px 15px 15px;
   font-weight: bold;
   display: flex;
@@ -43,4 +49,9 @@ $border: 2px solid #a02219;
   border: $border;
   border-radius: $border-radius;
   justify-content: center;
+}
+.btn {
+  display: flex;
+  margin-bottom: 5px;
+  margin-left: 30%;
 }
