@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import "../Scss/forgot.scss";
-import { json, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { APIURL } from "../env";
-import { Type } from "lucide-react";
+import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
 const Passwordreset = () => {
   const [password, setPassword] = useState("");
   const [confirmpassword, setconfirmpassword] = useState("");
+  const [unHide, setUnHide] = useState(false);
+
   const navigate = useNavigate();
 
   async function handlePassword(event) {
@@ -39,13 +41,16 @@ const Passwordreset = () => {
         />
 
         <input
-          type="password"
+          type={unHide ? "text" : "password"}
           placeholder="Confirm New Password"
           className="password-input"
           value={confirmpassword}
           onChange={(e) => setconfirmpassword(e.target.value)}
           required
         />
+        <button type="text" className="btn" onClick={() => setUnHide(!unHide)}>
+          {unHide ? <FaEye /> : <FaEyeSlash />}
+        </button>
         <button
           type="submit"
           className="submit-button"
