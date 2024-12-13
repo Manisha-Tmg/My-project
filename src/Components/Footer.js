@@ -19,7 +19,7 @@ function Footer() {
           <ul className="footer-links">
             <li>
               {" "}
-              <House size={20} color="#2556b6" />
+              <House size={18} color="#2556b6" />
               <a href="#home" className="footer-link">
                 Home
               </a>
@@ -33,7 +33,7 @@ function Footer() {
             <li>
               <Mail size={20} color="#2556b6" />
               <a href="#" className="footer-link">
-                Email: Samasyasewa@gmail.com
+                Samasyasewa@gmail.com
               </a>
             </li>
           </ul>

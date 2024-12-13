@@ -17,7 +17,7 @@ const Aboutus = () => {
               <div className="about-logo1" style={{ "text-align": "center" }}>
                 About
               </div>
-              <div className="about-logo">Us</div>
+              <div className="about-logo">us</div>
             </div>
 
             <p>
