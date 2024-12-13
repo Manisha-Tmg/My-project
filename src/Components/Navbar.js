@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../Css/Navbar.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Menu, X } from "lucide-react"; // Import Menu and X icons
+import Dropdown from "./Dropdown";
 
 const Navbar = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -39,6 +41,13 @@ const Navbar = () => {
       setIsLogin(false);
       navigate("/login");
     }
+  };
+
+  // For Hamburger menu
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleMenuClick = () => {
+    setMenuOpen(!menuOpen); // Toggle menu state
   };
 
   return (
@@ -100,6 +109,16 @@ const Navbar = () => {
               <button className="btn1">Log In</button>
             </Link>
           )}
+
+        </div>
+          {/* Hamburger Menu and Dropdown */}
+          <div className="hamburger-menu" onClick={handleMenuClick}>
+          {menuOpen ? (
+            <X className="cross-icon" /> 
+          ) : (
+            <Menu className="menu-icon" /> 
+          )}
+          {menuOpen && <Dropdown className="dropdown-menu" />}
         </div>
       </nav>
     </div>

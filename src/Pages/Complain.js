@@ -36,7 +36,7 @@ const Complain = () => {
   }
 
   return (
-    <div>
+    <div className="complain-container">
       <div className="Complainform-container" onSubmit={handleSubmit}>
         <button className="register-button">Register a Complaint</button>
         <div className="form-group">

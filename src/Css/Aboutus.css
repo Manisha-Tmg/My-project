@@ -1,6 +1,6 @@
 .about-us-container {
   padding: 20px;
-  padding-left: 50px;
+  padding-left: 30px;
 }
 
 .heading-container {
@@ -36,6 +36,7 @@
 .about-logo-container {
   display: flex;
   align-items: center;
+  gap:4px;
 }
 
 .about-logo1,

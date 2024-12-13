@@ -49,13 +49,13 @@ const Login = () => {
   return (
     <div className="body-login">
       <form className="form-login" onSubmit={handleLogin}>
-        <h2 className="h-2">LOG IN</h2>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
-            Email address
+            Email
           </label>
           <input
             type="email"
+            placeholder="Email"
             className="logform-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
@@ -72,6 +72,7 @@ const Login = () => {
           <input
             type={showHide ? "text" : "password"}
             className="logform-control"
+            placeholder="Password"
             id="exampleInputPassword1"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
