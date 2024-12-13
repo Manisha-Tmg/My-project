@@ -1,51 +1,71 @@
 import React, { useState } from "react";
 import "../Scss/forgot.scss";
 import { useNavigate } from "react-router-dom";
+import { APIURL } from "../env";
+import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
 const Passwordreset = () => {
   const [password, setPassword] = useState("");
   const [confirmpassword, setconfirmpassword] = useState("");
+  const [unHide, setUnHide] = useState(false);
+
   const navigate = useNavigate();
 
-  const handlePassword = async (event) => {
+  async function handlePassword(event) {
     event.preventDefault();
     if (password === confirmpassword) {
-      alert("Your password was sucessfully changed");
-      navigate("/login");
-    } else {
-      alert("Please check your password");
+      try {
+        const response = await fetch(`${APIURL}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({ password }),
+        });
+        if (response.ok) {
+          const data = await response.json();
+          alert(`password changesd succesfully, ${password}`);
+          navigate("/login");
+        }
+      } catch (error) {
+        alert(error);
+      }
     }
-  };
+  }
   return (
-    <div className="password-reset-container" onSubmit={handlePassword}>
+    <form className="password-reset-container" onSubmit={handlePassword}>
       <h1 className="password-reset-title">Password Reset</h1>
-      <form className="password-reset-form">
-        <input
-          type="password"
-          placeholder="New Password"
-          className="password-input"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+      <input
+        type={unHide ? "text" : "password"}
+        placeholder="New Password"
+        className="password-input"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
+      {/* <button
+        className="btn"
+        // onClick={() => setUnHide(!unHide)}
+      >
+        {unHide ? <FaEye /> : <FaEyeSlash />}
+      </button> */}
 
-        <input
-          type="password"
-          placeholder="Confirm New Password"
-          className="password-input"
-          value={confirmpassword}
-          onChange={(e) => setconfirmpassword(e.target.value)}
-          required
-        />
-        <button
-          type="submit"
-          className="submit-button"
-          onClick={handlePassword}
-        >
-          Submit
-        </button>
-      </form>
-    </div>
+      <input
+        type={unHide ? "text" : "password"}
+        placeholder="Confirm New Password"
+        className="password-input"
+        value={confirmpassword}
+        onChange={(e) => setconfirmpassword(e.target.value)}
+        required
+      />
+      <button type="text" className="btn" onClick={() => setUnHide(!unHide)}>
+        {unHide ? <FaEye /> : <FaEyeSlash />}
+      </button>
+      <button type="submit" className="submit-button">
+        Submit
+      </button>
+    </form>
   );
 };
 
