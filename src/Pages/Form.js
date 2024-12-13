@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Css/Form.css";
 import { APIURL } from "../env";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Form = () => {
+  const locationn = useLocation();
+  const grievanceType = locationn.state?.grievanceType || "";
+
   const [district, setDistrict] = useState("");
   const [tole, setTole] = useState("");
   const [wardNumber, setWardNumber] = useState("");
@@ -13,7 +16,11 @@ const Form = () => {
   const [complainTitle, setComplainTitle] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(false);
   const navigate = useNavigate();
-
+  useEffect(() => {
+    if (grievanceType) {
+      setComplainTitle(grievanceType); // Set the initial value for complainTitle
+    }
+  }, [grievanceType]);
   async function handleFormSubmit(e) {
     e.preventDefault();
     console.log(
@@ -81,6 +88,23 @@ const Form = () => {
             value={complainTitle}
             onChange={(e) => setComplainTitle(e.target.value)}
           />
+        </div>
+        <div className="form-group">
+          <label htmlFor="province">Province</label>
+          <select
+            id="province"
+            className="province"
+            value={province}
+            onChange={(e) => setProvince(e.target.value)}
+          >
+            <option value="province1">Province 1</option>
+            <option value="province2">Province 2</option>
+            <option value="province2">Province 3</option>
+            <option value="province2">Province 4</option>
+            <option value="province2">Province 5</option>
+            <option value="province2">Province 6</option>
+            <option value="province2">Province 7</option>
+          </select>
         </div>
 
         <div className="form-group">
@@ -168,24 +192,6 @@ const Form = () => {
             <option value="Taplejung">Taplejung</option>
             <option value="Terhathum">Terhathum</option>
             <option value="Udayapur">Udayapur</option>
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="province">Province</label>
-          <select
-            id="province"
-            className="province"
-            value={province}
-            onChange={(e) => setProvince(e.target.value)}
-          >
-            <option value="province1">Province 1</option>
-            <option value="province2">Province 2</option>
-            <option value="province2">Province 3</option>
-            <option value="province2">Province 4</option>
-            <option value="province2">Province 5</option>
-            <option value="province2">Province 6</option>
-            <option value="province2">Province 7</option>
           </select>
         </div>
 

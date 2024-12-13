@@ -77,14 +77,14 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+          <span
+            type="button"
+            className="eyebutton"
+            onClick={() => setShowHide(!showHide)}
+          >
+            {showHide ? <FaRegEye /> : <FaRegEyeSlash />}
+          </span>{" "}
         </div>
-        <button
-          type="button"
-          className="eyebutton"
-          onClick={() => setShowHide(!showHide)}
-        >
-          {showHide ? <FaRegEye /> : <FaRegEyeSlash />}
-        </button>
 
         <div className="remember-forgot">
           <Link id="forgot" to={"/forgot"}>

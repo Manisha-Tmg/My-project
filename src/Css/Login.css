@@ -42,15 +42,15 @@
 .logform-control {
   width: 100%;
   padding: 10px;
-  border: 2px solid #000000;
+  border: 2px solid #ffffff;
   border-radius: 4px;
   font-size: 16px;
 }
 
-.logform-control:focus {
-  border-color: #000000;
+/* .logform-control:focus {
+  border-color: #ffffff;
   outline: none;
-}
+} */
 
 .remember-forgot {
   display: flex;

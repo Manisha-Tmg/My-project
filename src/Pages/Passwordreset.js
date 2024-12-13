@@ -59,9 +59,9 @@ const Passwordreset = () => {
         onChange={(e) => setconfirmpassword(e.target.value)}
         required
       />
-      <button type="text" className="btn" onClick={() => setUnHide(!unHide)}>
+      <span type="text" className="btn" onClick={() => setUnHide(!unHide)}>
         {unHide ? <FaEye /> : <FaEyeSlash />}
-      </button>
+      </span>
       <button type="submit" className="submit-button">
         Submit
       </button>

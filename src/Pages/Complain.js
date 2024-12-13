@@ -26,7 +26,7 @@ const Complain = () => {
       const data = await response.json();
       if (data.success) {
         alert("Complaint submitted successfully!");
-        navigate("/form");
+        navigate("/form", { state: { grievanceType: selectedGrievance } });
       } else {
         alert("please select the type");
       }
@@ -46,7 +46,9 @@ const Complain = () => {
             value={selectedGrievance}
             onChange={(e) => setSelectedGrievance(e.target.value)}
           >
-            <option value="Natural Disasters">Natural Disasters</option>
+            <option value="" disabled>
+              Select a type
+            </option>
             <option value="Man-Made Disasters">Man-Made Disasters</option>
             <option value="Environmental Disasters">
               Environmental Disasters

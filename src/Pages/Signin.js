@@ -150,13 +150,13 @@ const Signin = () => {
             onChange={(e) => setPassword(e.target.value)}
             // required
           />
-          <button
+          <span
             type="text"
             className="btneye"
             onClick={() => setShowHide(!showHide)}
           >
             {showHide ? <FaRegEye /> : <FaRegEyeSlash />}
-          </button>
+          </span>
         </div>
         {/* Address Section */}
         <h3 className="h-22">Address Information</h3>
