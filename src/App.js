@@ -1,5 +1,6 @@
 import Navbar from "./Components/Navbar";
 import Aboutus from "./Pages/Aboutus";
+import Changepassword from "./Pages/Changepassword";
 import Complain from "./Pages/Complain";
 import Contact from "./Pages/Contact";
 import Form from "./Pages/Form";
@@ -26,6 +27,7 @@ function App() {
         <Route path="/forgot" element={<Passwordreset />} />
         <Route path="/otp" element={<Otppage />} />
         <Route path="/setting" element={<Setting />} />
+        <Route path="/changepassword" element={<Changepassword />} />
       </Routes>
     </Router>
   );
