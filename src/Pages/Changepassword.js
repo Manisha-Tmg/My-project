@@ -1,15 +1,20 @@
 import React, { useState } from "react";
-import { json, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { APIURL } from "../env";
 
 const Changepassword = () => {
   const [oldpass, setOldpass] = useState("");
   const [newpass, setNewpass] = useState("");
   const [confirmPass, setConfirmpass] = useState("");
+  const [errr, setErr] = useState(null);
+  const [success, setSuccess] = useState(null);
   const navigate = useNavigate();
 
   async function handlepassword(e) {
     e.preventDefault();
+
+    setErr(null);
+    setSuccess(null);
 
     if (newpass !== confirmPass) {
       alert("password don not match");
@@ -26,7 +31,7 @@ const Changepassword = () => {
       });
       if (res.ok) {
         const data = await res.json();
-        navigate("/login");
+        setTimeout(() => navigate("/login"), 3000); //navigate sto login page after 3sec
       }
     } catch (error) {
       alert(error);
@@ -53,6 +58,8 @@ const Changepassword = () => {
           onChange={(e) => setConfirmpass(e.target.value)}
         ></input>
       </form>
+      {errr && <p style={{ color: "red" }}>{errr}</p>}
+      {success && <p style={{ color: "green" }}>{success}</p>}
       <button onClick={handlepassword}></button>
     </div>
   );
