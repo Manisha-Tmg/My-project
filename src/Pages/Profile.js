@@ -3,21 +3,24 @@ import "../Css/Profile.css";
 import { useState, useEffect } from "react";
 import { APIURL } from "../env";
 
-const Profile = ({ user }) => {
+const Profile = () => {
   const [userData, setUserData] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    async function fetchUserData() {
       try {
         const response = await fetch(`${APIURL}/api/v1/user/profile`, {
           method: "GET",
-          headers: {},
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer${localStorage.getItem("token")}`,
+          },
         });
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch user data");
-        }
+        // if (!response.ok) {
+        //   alert(error);
+        // }
 
         const data = await response.json();
         setUserData(data);
@@ -26,7 +29,7 @@ const Profile = ({ user }) => {
       } finally {
         setLoading(false);
       }
-    };
+    }
 
     fetchUserData();
   }, []);

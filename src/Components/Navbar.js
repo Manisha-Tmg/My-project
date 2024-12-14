@@ -12,7 +12,26 @@ const Navbar = () => {
   const otpLocation = location.pathname;
   const forgotLocation = location.pathname;
 
-  // npm
+  // useEffect(() => {
+  //   const myToken = localStorage.getItem("token");
+  //   if (
+  //     myToken &&
+  //     signUpLocation !== "/signin" &&
+  //     otpLocation !== "/otp" &&
+  //     forgotLocation !== "/forgot"
+  //   ) {
+  //     setIsLogin(true);
+  //   } else {
+  //     setIsLogin(false);
+  //     if (
+  //       signUpLocation !== "/signin" &&
+  //       otpLocation !== "/otp" &&
+  //       forgotLocation !== "/forgot"
+  //     ) {
+  //       navigate("/login"); // Redirect to login page only if not on /signin page
+  //     }
+  //   }
+  // }, [navigate, signUpLocation]);
 
   const handleLogout = () => {
     const confirmCheck = window.confirm("Are you sure want to logout?");

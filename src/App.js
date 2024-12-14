@@ -8,7 +8,6 @@ import Login from "./Pages/Login";
 import Otppage from "./Pages/Otppage";
 import Passwordreset from "./Pages/Passwordreset";
 import Profile from "./Pages/Profile";
-import Setting from "./Pages/Setting";
 import Signin from "./Pages/Signin";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -26,7 +25,6 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/forgot" element={<Passwordreset />} />
         <Route path="/otp" element={<Otppage />} />
-        <Route path="/setting" element={<Setting />} />
         <Route path="/changepassword" element={<Changepassword />} />
       </Routes>
     </Router>

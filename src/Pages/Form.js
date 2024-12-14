@@ -97,7 +97,7 @@ const Form = () => {
             value={province}
             onChange={(e) => setProvince(e.target.value)}
           >
-            <option value="province1">Province 1</option>
+            <label value="slect province">Select Province</label>
             <option value="province2">Province 2</option>
             <option value="province2">Province 3</option>
             <option value="province2">Province 4</option>

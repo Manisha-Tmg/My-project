@@ -31,7 +31,7 @@ const Changepassword = () => {
       });
       if (res.ok) {
         const data = await res.json();
-        setTimeout(() => navigate("/login"), 3000); //navigate sto login page after 3sec
+        setTimeout(() => navigate("/login"), 3000); //navigate to login page after 3sec
       }
     } catch (error) {
       alert(error);
