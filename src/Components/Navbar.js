@@ -12,26 +12,7 @@ const Navbar = () => {
   const otpLocation = location.pathname;
   const forgotLocation = location.pathname;
 
-  useEffect(() => {
-    const myToken = localStorage.getItem("token");
-    if (
-      myToken &&
-      signUpLocation !== "/signin" &&
-      otpLocation !== "/otp" &&
-      forgotLocation !== "/forgot"
-    ) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-      if (
-        signUpLocation !== "/signin" &&
-        otpLocation !== "/otp" &&
-        forgotLocation !== "/forgot"
-      ) {
-        navigate("/login"); // Redirect to login page only if not on /signin page
-      }
-    }
-  }, [navigate, signUpLocation]);
+  // npm
 
   const handleLogout = () => {
     const confirmCheck = window.confirm("Are you sure want to logout?");
@@ -109,14 +90,13 @@ const Navbar = () => {
               <button className="btn1">Log In</button>
             </Link>
           )}
-
         </div>
-          {/* Hamburger Menu and Dropdown */}
-          <div className="hamburger-menu" onClick={handleMenuClick}>
+        {/* Hamburger Menu and Dropdown */}
+        <div className="hamburger-menu" onClick={handleMenuClick}>
           {menuOpen ? (
-            <X className="cross-icon" /> 
+            <X className="cross-icon" />
           ) : (
-            <Menu className="menu-icon" /> 
+            <Menu className="menu-icon" />
           )}
           {menuOpen && <Dropdown className="dropdown-menu" />}
         </div>
