@@ -142,7 +142,8 @@ const Signin = () => {
           </label>
 
           <input
-            type={showHide ? "text" : "password"}
+            type="password"
+            // type={showHide ? "text" : "password"}
             className="form-control"
             id="password"
             placeholder="Enter your password"
@@ -150,13 +151,13 @@ const Signin = () => {
             onChange={(e) => setPassword(e.target.value)}
             // required
           />
-          <span
+          {/* <span
             type="text"
             className="btneye"
             onClick={() => setShowHide(!showHide)}
           >
             {showHide ? <FaRegEye /> : <FaRegEyeSlash />}
-          </span>
+          </span> */}
         </div>
         {/* Address Section */}
         <h3 className="h-22">Address Information</h3>

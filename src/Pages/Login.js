@@ -70,7 +70,8 @@ const Login = () => {
             Password
           </label>
           <input
-            type={showHide ? "text" : "password"}
+            type="password"
+            // type={showHide ? "text" : "password"}
             className="logform-control"
             placeholder="Password"
             id="exampleInputPassword1"
@@ -78,13 +79,13 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <span
+          {/* <span
             type="text"
             className="eyebutton"
             onClick={() => setShowHide(!showHide)}
           >
             {showHide ? <FaRegEye /> : <FaRegEyeSlash />}
-          </span>{" "}
+          </span>{" "} */}
         </div>
 
         <div className="remember-forgot">

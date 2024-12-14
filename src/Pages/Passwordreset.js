@@ -44,24 +44,19 @@ const Passwordreset = () => {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-      {/* <button
-        className="btn"
-        // onClick={() => setUnHide(!unHide)}
-      >
-        {unHide ? <FaEye /> : <FaEyeSlash />}
-      </button> */}
 
       <input
-        type={unHide ? "text" : "password"}
+        type="password"
+        // type={unHide ? "text" : "password"}
         placeholder="Confirm New Password"
         className="password-input"
         value={confirmpassword}
         onChange={(e) => setconfirmpassword(e.target.value)}
         required
       />
-      <span type="text" className="btn" onClick={() => setUnHide(!unHide)}>
+      {/* <span type="text" className="btn" onClick={() => setUnHide(!unHide)}>
         {unHide ? <FaEye /> : <FaEyeSlash />}
-      </span>
+      </span> */}
       <button type="submit" className="submit-button">
         Submit
       </button>
