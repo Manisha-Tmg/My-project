@@ -87,30 +87,32 @@
 }
 
 @media screen and (max-width: 800px) {
-  .nav-links, .auth-btns {
-    display: none; 
+  .nav-links,
+  .auth-btns {
+    display: none;
   }
 
   .hamburger-menu {
-    display: block; 
+    display: block;
   }
-  .menu-icon, .cross-icon{
+  .menu-icon,
+  .cross-icon {
     width: 44px;
     height: 44px;
-    background: var(--Frame, #0E2F3C);
+    background: var(--Frame, #0e2f3c);
     color: white;
     padding: 4px;
     border-radius: 3px;
   }
 
   .menu-icon:hover {
-    color: rgb(118, 120, 122); 
-    cursor: pointer; 
+    color: rgb(118, 120, 122);
+    cursor: pointer;
   }
 }
 
 @media screen and (min-width: 800px) {
   .hamburger-menu {
-    display: none; 
+    display: none;
   }
 }

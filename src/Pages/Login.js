@@ -79,7 +79,7 @@ const Login = () => {
             required
           />
           <span
-            type="button"
+            type="text"
             className="eyebutton"
             onClick={() => setShowHide(!showHide)}
           >
