@@ -4,7 +4,7 @@ import { APIURL } from "../env";
 
 const Otppage = () => {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
-  const [userName, setUserName] = useState("test12@gmail.com");
+  // const [userName, setUserName] = useState("test12@gmail.com");
 
   const [Msg, setMsg] = useState("");
 
@@ -33,7 +33,6 @@ const Otppage = () => {
           headers: {
             "Content-Type": "application/json",
             // Accept: "application/json",
-            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({ otp: enteredOtp }),
         });

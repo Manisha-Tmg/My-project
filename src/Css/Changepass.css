@@ -1,0 +1,74 @@
+:root {
+  --primarycolor: #0e2f3c;
+  --fontcolor: #ffffff;
+  --font-family: DM Sans;
+  --inputbg: #ffffff;
+  --buttoncolor: #e82f22;
+  --buttonhover: #c30d00;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.div-password {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  font-family: "Arial", sans-serif;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: var(--fontcolor);
+}
+
+.form-password {
+  background-color: var(--primarycolor);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  background: var(--inputbg);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--inputbg);
+}
+.labels {
+  display: flex;
+}
+
+.label-pass {
+  /* background-color: var(--primarycolor); */
+  font-size: 0.9rem;
+  color: var(--fontcolor);
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.input-pass {
+  background-color: var(--inputbg);
+
+  padding: 10px;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  border: 1px solid var(--inputbg);
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 15px;
+  font-size: 1rem;
+  background: var(--buttoncolor);
+  border: 1px solid var(--inputbg);
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: var(--buttonhover);
+}
