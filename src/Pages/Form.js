@@ -18,7 +18,7 @@ const Form = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (grievanceType) {
-      setComplainTitle(grievanceType); // Set the initial value for complainTitle
+      setComplainTitle(grievanceType);
     }
   }, [grievanceType]);
   async function handleFormSubmit(e) {

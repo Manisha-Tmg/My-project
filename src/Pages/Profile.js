@@ -6,6 +6,11 @@ import { APIURL } from "../env";
 const Profile = () => {
   const [userData, setUserData] = useState("");
   const [loading, setLoading] = useState(true);
+  const accessToken = localStorage.setItem(
+    "accessToken",
+    userData.data.accessToken
+  );
+  const token = localStorage.setItem("token", userData.data.token);
 
   useEffect(() => {
     async function fetchUserData() {
@@ -14,7 +19,8 @@ const Profile = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer${localStorage.getItem("token")}`,
+            Authorization: `Bearer${localStorage.getItem({ token })}`,
+            Authorization: `Bearer${localStorage.getItem({ accessToken })}`,
           },
         });
 

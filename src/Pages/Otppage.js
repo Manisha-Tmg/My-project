@@ -4,6 +4,8 @@ import { APIURL } from "../env";
 
 const Otppage = () => {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [userName, setUserName] = useState("test12@gmail.com");
+
   const [Msg, setMsg] = useState("");
 
   const handleChange = (e, index) => {
@@ -33,6 +35,7 @@ const Otppage = () => {
           },
           body: JSON.stringify({ otp: enteredOtp }),
         });
+        console.log("error", response);
         if (response.ok) {
           const data = await response.json();
           setMsg(`otp verified:${data.message}`);
