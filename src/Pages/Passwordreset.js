@@ -36,19 +36,21 @@ const Passwordreset = () => {
   return (
     <form className="password-reset-container" onSubmit={handlePassword}>
       <h1 className="password-reset-title">Password Reset</h1>
+      <label>New Password</label>
       <input
         type={unHide ? "text" : "password"}
-        placeholder="New Password"
+        // placeholder="New Password"
         className="password-input"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         required
       />
+      <label>Confirm Password</label>
 
       <input
         type="password"
         // type={unHide ? "text" : "password"}
-        placeholder="Confirm New Password"
+        // placeholder="Confirm  Password"
         className="password-input"
         value={confirmpassword}
         onChange={(e) => setconfirmpassword(e.target.value)}

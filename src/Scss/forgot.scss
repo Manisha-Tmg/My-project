@@ -36,7 +36,11 @@ $border: 2px solid #a02219;
   width: 100%;
   max-width: 400px;
 }
-
+.password-input {
+  color: #ffffff;
+  display: flex;
+  justify-content: left;
+}
 .submit-button {
   width: 100%;
   max-width: 400px;

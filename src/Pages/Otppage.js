@@ -27,11 +27,13 @@ const Otppage = () => {
     const enteredOtp = otp.join(""); // Combine all OTP parts into a single string
     if (enteredOtp.length === 6) {
       try {
+        const token = localStorage.getItem("accesstoken");
         const response = await fetch(`${APIURL}/api/v1/auth/verify-user`, {
           method: "POST",
           headers: {
-            "Content-Type": "apllication/json",
-            Accept: "application/json",
+            "Content-Type": "application/json",
+            // Accept: "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({ otp: enteredOtp }),
         });
