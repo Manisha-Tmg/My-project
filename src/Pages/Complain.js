@@ -10,35 +10,47 @@ const Complain = () => {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    console.log(selectedGrievance);
+    // const accessToken = localStorage.getItem("accessToken");
+    // const Token = localStorage.getItem("token");
+    if (!selectedGrievance) {
+      alert("Please select a grievance type.");
+      return;
+    }
     try {
-      const response = await fetch(`${APIURL}/api`, {
-        method: "POST",
+      const accessToken = localStorage.getItem("accessToken");
+
+      const response = await fetch(`${APIURL}/api/v1/categories`, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
           Accept: "application/json",
         },
-        body: JSON.stringify({
-          selectedGrievance,
-        }),
       });
-
+      console.log("AccessToken:", accessToken);
+      console.log("Headers:", {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      });
       const data = await response.json();
       if (data.success) {
-        alert("Complaint submitted successfully!");
+        alert("Grievance type selected successfully!");
         navigate("/form", { state: { grievanceType: selectedGrievance } });
       } else {
-        alert("please select the type");
+        const errorText = await response.text();
+        throw new Error(`Error ${response.status}: ${errorText}`);
       }
     } catch (error) {
-      alert(error.message);
+      alert(`Error: ${error.message}`);
     }
   }
 
   return (
     <div className="complain-container">
-      <div className="Complainform-container" onSubmit={handleSubmit}>
-        <button className="register-button">Register a Complaint</button>
+      <div className="Complainform-container">
+        <button className="register-button" onClick={handleSubmit}>
+          Register a Complaint
+        </button>
         <div className="form-group">
           <label className="label1">Select the Grievance Type</label>
           <select
@@ -53,13 +65,12 @@ const Complain = () => {
             <option value="Environmental Disasters">
               Environmental Disasters
             </option>
+            <option value="GARBAGE-COLLECTION">Garbage Collection</option>
           </select>
         </div>
-        <Link to={"/form"}>
-          <button className="next-button" onClick={handleSubmit}>
-            Step 1
-          </button>
-        </Link>
+        <button className="next-button" onClick={handleSubmit}>
+          Step 1
+        </button>
       </div>
       <Footer />
     </div>

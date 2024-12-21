@@ -22,7 +22,7 @@ const Otppage = () => {
     }
   };
 
-  async function handlesub(e) {
+  async function handlesub(e, action) {
     e.preventDefault();
     const enteredOtp = otp.join(""); // Combine all OTP parts into a single string
     if (enteredOtp.length === 6) {
@@ -34,7 +34,9 @@ const Otppage = () => {
             "Content-Type": "application/json",
             // Accept: "application/json",
           },
-          body: JSON.stringify({ otp: enteredOtp }),
+          body: JSON.stringify({
+            action,
+          }),
         });
         console.log("error", response);
         if (response.ok) {
@@ -53,6 +55,7 @@ const Otppage = () => {
     <div className="otp-page">
       <h2>Enter OTP</h2>
       <form onSubmit={handlesub} className="otp-form">
+        <label className="otp-email">Enter your email</label>
         <div className="otp-inputs">
           {otp.map((value, index) => (
             <input

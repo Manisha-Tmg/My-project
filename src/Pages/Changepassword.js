@@ -39,39 +39,36 @@ const Changepassword = () => {
     }
   }
   return (
-    <div className="div-password">
+    <form className="form-password" onSubmit={handlepassword}>
       <h2>Change Password</h2>
-      <form className="form-password" onSubmit={handlepassword}>
-        <label className="label-pass" type="password">
-          Old password
-        </label>
-        <input
-          className="input-pass"
-          value={oldpass}
-          onChange={(e) => setOldpass(e.target.value)}
-        ></input>
-        <label className="label-pass" type="password">
-          New password
-        </label>
-        <input
-          className="input-pass"
-          value={newpass}
-          onChange={(e) => setNewpass(e.target.value)}
-        ></input>
-
-        <label className="label-pass" type="password">
-          Confirm password
-        </label>
-        <input
-          className="input-pass"
-          value={confirmPass}
-          onChange={(e) => setConfirmpass(e.target.value)}
-        ></input>
-      </form>
+      <label className="label-pass" type="password">
+        Old password
+      </label>
+      <input
+        className="input-pass"
+        value={oldpass}
+        onChange={(e) => setOldpass(e.target.value)}
+      ></input>
+      <label className="label-pass" type="password">
+        New password
+      </label>
+      <input
+        className="input-pass"
+        value={newpass}
+        onChange={(e) => setNewpass(e.target.value)}
+      ></input>
+      <label className="label-pass" type="password">
+        Confirm password
+      </label>
+      <input
+        className="input-pass"
+        value={confirmPass}
+        onChange={(e) => setConfirmpass(e.target.value)}
+      ></input>
       {errr && <p style={{ color: "red" }}>{errr}</p>}
       {success && <p style={{ color: "green" }}>{success}</p>}
-      <button onClick={handlepassword}>Next</button>
-    </div>
+      <button onClick={handlepassword}>Next</button>{" "}
+    </form>
   );
 };
 

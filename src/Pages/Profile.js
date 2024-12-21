@@ -1,37 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../Css/Profile.css";
-import { useState, useEffect } from "react";
 import { APIURL } from "../env";
 
 const Profile = () => {
-  const [userData, setUserData] = useState("");
+  const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const accessToken = localStorage.setItem(
-    "accessToken",
-    userData.data.accessToken
-  );
-  const token = localStorage.setItem("token", userData.data.token);
 
   useEffect(() => {
     async function fetchUserData() {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        alert("No token found. Please log in.");
+        window.location.href = "/login"; // Redirect to login
+        return;
+      }
+
       try {
         const response = await fetch(`${APIURL}/api/v1/user/profile`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer${localStorage.getItem({ token })}`,
-            Authorization: `Bearer${localStorage.getItem({ accessToken })}`,
+            Authorization: `Bearer ${token}`,
           },
         });
 
-        // if (!response.ok) {
-        //   alert(error);
-        // }
+        if (!response.ok) {
+          if (response.status === 401) {
+            alert("Unauthorized. Please log in again.");
+            localStorage.removeItem("token");
+            window.location.href = "/login"; // Redirect to login
+            return;
+          }
+          throw new Error("Failed to fetch user data.");
+        }
 
         const data = await response.json();
-        setUserData(data);
+        setUserData(data.user || data);
       } catch (error) {
         console.error("Error fetching user data:", error);
+        alert("An error occurred while fetching user data.");
       } finally {
         setLoading(false);
       }
@@ -41,7 +49,7 @@ const Profile = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="loading-spinner">Loading...</div>;
   }
 
   if (!userData) {
@@ -52,13 +60,13 @@ const Profile = () => {
     <div className="profile">
       <h2>Profile</h2>
       <div className="user-detail-card">
-        <p>Name: {userData.name}</p>
-        <p>Contact: {userData.contact}</p>
-        <p>Province: {userData.province}</p>
-        <p>Tole: {userData.tole}</p>
-        <p>Ward No: {userData.wardNo}</p>
-        <p>Location: {userData.location}</p>
-        <p>Email: {userData.email}</p>
+        <p>Name: {userData.name || "N/A"}</p>
+        <p>Contact: {userData.contact || "N/A"}</p>
+        <p>Province: {userData.province || "N/A"}</p>
+        <p>Tole: {userData.tole || "N/A"}</p>
+        <p>Ward No: {userData.wardNo || "N/A"}</p>
+        <p>Location: {userData.location || "N/A"}</p>
+        <p>Email: {userData.email || "N/A"}</p>
       </div>
     </div>
   );

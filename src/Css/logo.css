@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.left-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo1,
+.logo {
+  font-size: 24px;
+  color: white;
+  font-weight: bold;
+}
+
+.logo1 {
+  color: #ffffff;
+}
+
+.logo {
+  color: #e82f22;
+}

@@ -19,28 +19,6 @@
   z-index: 1000;
 }
 
-/* Left container with logo */
-.left-container {
-  display: flex;
-  align-items: center;
-}
-
-/* Logo styles */
-.logo1,
-.logo {
-  font-size: 24px;
-  color: white;
-  font-weight: bold;
-}
-
-.logo1 {
-  color: #ffffff;
-}
-
-.logo {
-  color: #e82f22;
-}
-
 /* Navigation links */
 .nav-links {
   display: flex;
@@ -115,4 +93,28 @@
   .hamburger-menu {
     display: none;
   }
+}
+.user-avatar-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  text-transform: uppercase;
+}
+
+.user-name {
+  font-size: 16px;
+  color: #ffffff;
 }

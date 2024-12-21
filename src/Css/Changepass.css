@@ -1,5 +1,5 @@
 :root {
-  --primarycolor: #0e2f3c;
+  --primarycolor: #0387bb;
   --fontcolor: #ffffff;
   --font-family: DM Sans;
   --inputbg: #ffffff;
@@ -18,6 +18,8 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  background-color: var(--primarycolor);
+
   padding: 20px;
   font-family: "Arial", sans-serif;
 }
@@ -39,12 +41,8 @@ h2 {
   border-radius: 8px;
   border: 1px solid var(--inputbg);
 }
-.labels {
-  display: flex;
-}
 
 .label-pass {
-  /* background-color: var(--primarycolor); */
   font-size: 0.9rem;
   color: var(--fontcolor);
   margin-bottom: 8px;

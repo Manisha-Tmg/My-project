@@ -91,7 +91,9 @@ const Signin = () => {
         setPrimarycontact("");
         setSecondarycontact("");
 
-        navigate("/otp");
+        setTimeout(() => {
+          navigate("/otp");
+        }, 1000);
       } else {
         alert(userData.message);
       }
