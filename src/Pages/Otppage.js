@@ -1,81 +1,77 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../Css/otp.css";
 import { APIURL } from "../env";
 
-const Otppage = () => {
-  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
-  // const [userName, setUserName] = useState("test12@gmail.com");
+const OtpVerification = () => {
+  const [otp, setOtp] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
+  const navigate = useNavigate();
 
-  const [Msg, setMsg] = useState("");
+  const handleVerifyOtp = async (event) => {
+    event.preventDefault();
+    setErrorMsg(""); // Clear previous errors
+    setSuccessMsg(""); // Clear previous success messages
 
-  const handleChange = (e, index) => {
-    const value = e.target.value;
-    if (!isNaN(value) && value.length <= 1) {
-      const newotp = [...otp];
-      newotp[index] = value;
-      setOtp(newotp);
-      // Focus on the next input if exists
-      const nextInput = e.target.nextSibling;
-      if (value !== "" && nextInput) {
-        nextInput.focus();
+    // Validate OTP: It must be 6 digits and numeric
+    if (!/^\d{6}$/.test(otp)) {
+      setErrorMsg("Please enter a valid 6-digit OTP.");
+      return;
+    }
+
+    try {
+      const response = await fetch(`${APIURL}/api/v1/auth/verify-user`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ otp, email: "man@gmail.com" }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSuccessMsg("OTP verified successfully!");
+        setTimeout(() => {
+          navigate("/login"); // Redirect to the Login page if verification was successful
+        }, 1000);
+      } else {
+        setErrorMsg(data.message || "Invalid OTP. Please try again.");
       }
+    } catch (error) {
+      setErrorMsg("An error occurred during verification. Please try again.");
     }
   };
 
-  async function handlesub(e, action) {
-    e.preventDefault();
-    const enteredOtp = otp.join(""); // Combine all OTP parts into a single string
-    if (enteredOtp.length === 6) {
-      try {
-        const token = localStorage.getItem("accesstoken");
-        const response = await fetch(`${APIURL}/api/v1/auth/verify-user`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            // Accept: "application/json",
-          },
-          body: JSON.stringify({
-            action,
-          }),
-        });
-        console.log("error", response);
-        if (response.ok) {
-          const data = await response.json();
-          setMsg(`otp verified:${data.message}`);
-        } else {
-          const errormessage = await response.json();
-          setMsg(`error occured ${errormessage.message}`);
-        }
-      } catch (error) {
-        alert(error);
-      }
-    }
-  }
   return (
-    <div className="otp-page">
-      <h2>Enter OTP</h2>
-      <form onSubmit={handlesub} className="otp-form">
-        <label className="otp-email">Enter your email</label>
-        <div className="otp-inputs">
-          {otp.map((value, index) => (
-            <input
-              key={index}
-              type="text"
-              maxLength="1"
-              value={value}
-              onChange={(e) => handleChange(e, index)}
-              onFocus={(e) => e.target.select()}
-              className="otp-input"
-            />
-          ))}
-        </div>
-        <button type="submit" className="otp-submit">
-          Submit
+    <div className="otp-verification-container">
+      <form className="otp-verification-form" onSubmit={handleVerifyOtp}>
+        <h2 className="otp-header">OTP Verification</h2>
+        <p className="otp-instructions">
+          Please enter the OTP sent to your email or phone.
+        </p>
+
+        <input
+          type="text"
+          className="form-control otp-input"
+          placeholder="Enter OTP"
+          value={otp}
+          maxLength="6" // Restrict input to 6 characters
+          pattern="\d*" // Allow only numeric input
+          onChange={(e) => setOtp(e.target.value)}
+        />
+
+        {errorMsg && <p className="error-message">{errorMsg}</p>}
+        {successMsg && <p className="success-message">{successMsg}</p>}
+
+        <button type="submit" className="btn-verify">
+          Verify OTP
         </button>
       </form>
-      {Msg && <p className="otp-message">{Msg}</p>}
     </div>
   );
 };
 
-export default Otppage;
+export default OtpVerification;

@@ -6,28 +6,30 @@ import { FaRegEyeSlash } from "react-icons/fa";
 import { APIURL } from "../env";
 
 const Signin = () => {
+  const [provinceId, setProvinceId] = useState("");
+  const [districtId, setDistrictId] = useState("");
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [state, setState] = useState("");
   const [tole, setTole] = useState("");
   const [ward, setWard] = useState("");
-  const [location, setLocation] = useState("");
   const [Primarycontact, setPrimarycontact] = useState("");
   const [Secondarycontact, setSecondarycontact] = useState("");
   const [showHide, setShowHide] = useState(false);
   const [errors, setErrors] = useState({});
+  const [errorMsg, setErrorMsg] = useState("");
 
   const navigate = useNavigate();
+
   const handleValidation = () => {
     const newErrors = {
       fullname: !fullname,
       email: !email,
       password: !password,
-      state: !state,
+      provinceId: !provinceId,
+      districtId: !districtId,
       tole: !tole,
       ward: !ward,
-      location: !location,
       Primarycontact: !Primarycontact || Primarycontact <= 0,
       Secondarycontact: !Secondarycontact || Secondarycontact <= 0,
     };
@@ -39,22 +41,19 @@ const Signin = () => {
     fullname,
     email,
     password,
-    state,
+    provinceId,
+    districtId,
     tole,
     ward,
-    location,
     Primarycontact,
     Secondarycontact,
   }).some((value) => !value);
 
-  async function handleSignup(event) {
+  const handleSignup = async (event) => {
     event.preventDefault();
     if (Primarycontact < 0) {
       alert("Numbers cannot be negative");
     }
-    // } else {
-    //   return;
-    // }
     if (!handleValidation()) {
       return;
     }
@@ -70,24 +69,25 @@ const Signin = () => {
           fullname,
           email,
           password,
-          state,
+          provinceId,
+          districtId,
           tole,
           ward,
-          location,
           Primarycontact,
           Secondarycontact,
         }),
       });
+
       const userData = await res.json();
       if (userData.success) {
-        alert("User created sucessfully");
+        alert("User created successfully");
         setFullname("");
         setEmail("");
         setPassword("");
-        setState("");
+        setProvinceId("");
+        setDistrictId("");
         setTole("");
         setWard("");
-        setLocation("");
         setPrimarycontact("");
         setSecondarycontact("");
 
@@ -98,13 +98,13 @@ const Signin = () => {
         alert(userData.message);
       }
     } catch (error) {
-      alert("errorrrr 404", error);
+      alert("Error 404", error);
     }
-  }
-  const [errorMsg, setErrorMsg] = useState("");
+  };
+
   useEffect(() => {
     setErrorMsg("");
-  });
+  }, []);
   return (
     <div className="body-signin" onSubmit={handleSignup}>
       <form className="form-sign">
@@ -164,17 +164,19 @@ const Signin = () => {
         {/* Address Section */}
         <h3 className="h-22">Address Information</h3>
         <div className="m-3">
-          <label htmlFor="state" className="form-label">
-            Province
-          </label>
+          <label>Province ID</label>
           <input
             type="text"
-            className="form-control"
-            id="state"
-            placeholder="Enter your state"
-            value={state}
-            onChange={(e) => setState(e.target.value)}
-            // required
+            value={provinceId}
+            onChange={(e) => setProvinceId(e.target.value)}
+          />
+        </div>
+        <div>
+          <label>District ID</label>
+          <input
+            type="text"
+            value={districtId}
+            onChange={(e) => setDistrictId(e.target.value)}
           />
         </div>
         <div className="m-3">
@@ -205,7 +207,7 @@ const Signin = () => {
             // required
           />
         </div>
-        <div className="m-3">
+        {/* <div className="m-3">
           <label htmlFor="location" className="form-label">
             Location
           </label>
@@ -217,8 +219,8 @@ const Signin = () => {
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             // required
-          />
-        </div>
+          /> */}
+        {/* </div> */}
         <div className="m-3">
           <label htmlFor="contact" className="form-label">
             Primary Contact

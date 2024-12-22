@@ -5,7 +5,7 @@ const Mycomplain = () => {
   async function handleComplaints(e) {
     e.preventDefault();
     try {
-      const res = await fetch(`${APIURL}`, {
+      const res = await fetch(`${APIURL}/api/v1/complaint`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

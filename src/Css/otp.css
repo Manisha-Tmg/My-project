@@ -1,72 +1,65 @@
-/* Page container styling */
-.otp-page {
+.otp-verification-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
-  font-family: Arial, sans-serif;
   background-color: #0e2f3c;
-  margin: 0;
+}
+
+.otp-verification-form {
+  background: white;
+  border: 2 px solid #0e2f3c;
+
   padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
 }
 
-.otp-email {
-}
-
-/* Heading styling */
-.otp-page h2 {
+.otp-header {
+  margin-bottom: 10px;
   color: #ffffff;
-  font-size: 24px;
+  border: 2 px solid #0e2f3c;
+}
+
+.otp-instructions {
+  border: 2 px solid #0e2f3c;
+  font-size: 14px;
+  color: #ffffff;
   margin-bottom: 20px;
 }
 
-/* Form container styling */
-.otp-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* OTP input fields container */
-.otp-inputs {
-  display: flex;
-  justify-content: center;
-  gap: 10px; /* Space between input fields */
-  margin-bottom: 15px;
-}
-
-/* Individual OTP input styling */
 .otp-input {
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  font-size: 18px;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  transition: border-color 0.3s;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #000000;
+  border-radius: 4px;
 }
 
-/* Submit button styling */
-.otp-submit {
-  padding: 10px 20px;
-  font-size: 16px;
-  color: #fff;
-  background-color: #a02219;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-/* Hover effect for the button */
-.otp-submit:hover {
-  background-color: #6d1610;
-}
-
-/* Message styling */
-.otp-message {
-  margin-top: 10px;
+.error-message {
+  color: red;
   font-size: 14px;
-  color: #e8dcdc;
+  margin-bottom: 10px;
+}
+
+.success-message {
+  color: green;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.btn-verify {
+  background-color: #e82f22;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btn-verify:hover {
+  background-color: #d0261e;
 }

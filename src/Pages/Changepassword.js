@@ -23,7 +23,7 @@ const Changepassword = () => {
 
     const password = { oldpass, newpass };
     try {
-      const res = await fetch(`${APIURL}`, {
+      const res = await fetch(`${APIURL}/api/v1//user/profile`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

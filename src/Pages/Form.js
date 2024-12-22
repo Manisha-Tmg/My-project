@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import "../Css/Form.css";
 import { APIURL } from "../env";
 import { useLocation, useNavigate } from "react-router-dom";
+import { storage } from "../firebase"; // Import Firebase storage
 
 const Form = () => {
   const locationn = useLocation();
   const grievanceType = locationn.state?.grievanceType || "";
-
   const [district, setDistrict] = useState("");
   const [tole, setTole] = useState("");
   const [wardNumber, setWardNumber] = useState("");
@@ -15,12 +15,41 @@ const Form = () => {
   const [province, setProvince] = useState("");
   const [complainTitle, setComplainTitle] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(false);
+  const [files, setFiles] = useState([]); // State to hold file attachments
   const navigate = useNavigate();
+
   useEffect(() => {
     if (grievanceType) {
       setComplainTitle(grievanceType);
     }
   }, [grievanceType]);
+
+  // Handle file selection
+  const handleFileChange = (e) => {
+    setFiles(e.target.files);
+  };
+
+  // Upload files to Firebase Storage
+  const uploadFiles = async () => {
+    const fileUrls = [];
+    const promises = [];
+
+    for (const file of files) {
+      const storageRef = storage.ref(`complaints/${file.name}`);
+      const uploadTask = storageRef.put(file);
+
+      promises.push(
+        uploadTask.then(async (snapshot) => {
+          const downloadURL = await snapshot.ref.getDownloadURL();
+          fileUrls.push(downloadURL); // Save the URL for each uploaded file
+        })
+      );
+    }
+
+    await Promise.all(promises); // Wait until all files are uploaded
+    return fileUrls;
+  };
+
   async function handleFormSubmit(e) {
     e.preventDefault();
     console.log(
@@ -44,8 +73,17 @@ const Form = () => {
       description,
       isAnonymous,
     };
+
     const accessToken = localStorage.getItem("accessToken");
+
     try {
+      let fileUrls = [];
+      if (files.length > 0) {
+        fileUrls = await uploadFiles(); // Upload files and get URLs
+      }
+
+      formData.files = fileUrls; // Add file URLs to the form data
+
       const response = await fetch(`${APIURL}/api/v1/complaint`, {
         method: "POST",
         headers: {
@@ -66,7 +104,7 @@ const Form = () => {
       }
     } catch (error) {
       console.error("Error submitting the complaint:", error);
-      alert(error);
+      alert("Error submitting the complaint");
     }
   }
 
@@ -232,6 +270,17 @@ const Form = () => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           ></textarea>
+        </div>
+
+        {/* File input */}
+        <div className="form-group">
+          <label htmlFor="attachments">Attach Files</label>
+          <input
+            id="attachments"
+            type="file"
+            multiple
+            onChange={handleFileChange}
+          />
         </div>
 
         <div className="form-group">

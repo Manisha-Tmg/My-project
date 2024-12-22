@@ -48,18 +48,18 @@ const Complain = () => {
   return (
     <div className="complain-container">
       <div className="Complainform-container">
-        <button className="register-button" onClick={handleSubmit}>
+        <h2 className="register-h2" onClick={handleSubmit}>
           Register a Complaint
-        </button>
+        </h2>
         <div className="form-group">
-          <label className="label1">Select the Grievance Type</label>
+          {/* <label className="label1">Select the Grievance Type</label> */}
           <select
             className="type"
             value={selectedGrievance}
             onChange={(e) => setSelectedGrievance(e.target.value)}
           >
             <option value="" disabled>
-              Select a type
+              Select the Grievance Type{" "}
             </option>
             <option value="Man-Made Disasters">Man-Made Disasters</option>
             <option value="Environmental Disasters">
