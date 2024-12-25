@@ -12,22 +12,26 @@
   padding: 0;
 }
 
-.div-password {
+.form-password {
+  gap: 20px;
+  margin-top: 10%;
+
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center;
+  justify-content: center; */
   min-height: 100vh;
   background-color: var(--primarycolor);
-
   padding: 20px;
   font-family: "Arial", sans-serif;
 }
-
+/*
 h2 {
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  color: var(--fontcolor);
+  color: white;
+  font: 16;
+  font-family: DM Sans;
+  font-weight: 600;
+  word-wrap: break-word;
 }
 
 .form-password {
@@ -69,4 +73,58 @@ button {
 
 button:hover {
   background-color: var(--buttonhover);
+}
+ .label-pass {
+  color: white;
+  font-size: 16;
+  font-family: DM Sans;
+  font-weight: 600;
+  word-wrap: break-word;
+} 
+ */
+.form-password {
+  justify-content: center;
+  align-items: center;
+}
+.input-pass {
+  padding: 10px;
+  outline: none;
+  /* padding: auto; */
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+  width: 380px;
+  height: 50px;
+  border: 1px solid #ccc;
+
+  color: black;
+  background: white;
+  border-radius: 10px;
+}
+.btnn {
+  width: 100%;
+  width: 380px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px solid #a42a24;
+  background: #a42a24;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: #fbfdfd;
+  font-size: 20;
+  font-family: DM Sans;
+  font-weight: 900;
+  line-height: 22px;
+  word-wrap: break-word;
 }

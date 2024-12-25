@@ -94,27 +94,3 @@
     display: none;
   }
 }
-.user-avatar-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.user-avatar {
-  width: 40px;
-  height: 40px;
-  background-color: #ffffff;
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  text-transform: uppercase;
-}
-
-.user-name {
-  font-size: 16px;
-  color: #ffffff;
-}

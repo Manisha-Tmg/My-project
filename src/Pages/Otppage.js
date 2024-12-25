@@ -27,7 +27,7 @@ const OtpVerification = () => {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify({ otp, email: "man@gmail.com" }),
+        body: JSON.stringify({ otp, email: "Manisha35@gmail.com" }),
       });
 
       const data = await response.json();

@@ -44,6 +44,7 @@
 
 .logform-control {
   width: 100%;
+  outline: none;
   padding: 10px;
   color: black;
   border: 2px solid #ffffff;

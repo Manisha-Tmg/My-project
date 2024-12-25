@@ -8,11 +8,10 @@ const Profile = () => {
 
   useEffect(() => {
     async function fetchUserData() {
-      const token = localStorage.getItem("token");
-
+      const token = localStorage.getItem("accessToken");
       if (!token) {
         alert("No token found. Please log in.");
-        window.location.href = "/login"; // Redirect to login
+        window.location.href = "/login";
         return;
       }
 
@@ -21,22 +20,23 @@ const Profile = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+
             Authorization: `Bearer ${token}`,
           },
         });
+        console.log({ Authorization: `Bearer ${token}` });
 
-        if (!response.ok) {
-          if (response.status === 401) {
-            alert("Unauthorized. Please log in again.");
-            localStorage.removeItem("token");
-            window.location.href = "/login"; // Redirect to login
-            return;
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Fetched Data:", data);
+          if (data.success) {
+            setUserData(data.data);
+          } else {
+            alert("Failed to fetch user profile: " + data.message);
           }
+        } else {
           throw new Error("Failed to fetch user data.");
         }
-
-        const data = await response.json();
-        setUserData(data.user || data);
       } catch (error) {
         console.error("Error fetching user data:", error);
         alert("An error occurred while fetching user data.");
@@ -60,13 +60,43 @@ const Profile = () => {
     <div className="profile">
       <h2>Profile</h2>
       <div className="user-detail-card">
-        <p>Name: {userData.name || "N/A"}</p>
-        <p>Contact: {userData.contact || "N/A"}</p>
-        <p>Province: {userData.province || "N/A"}</p>
-        <p>Tole: {userData.tole || "N/A"}</p>
-        <p>Ward No: {userData.wardNo || "N/A"}</p>
-        <p>Location: {userData.location || "N/A"}</p>
-        <p>Email: {userData.email || "N/A"}</p>
+        <p className="p-p">
+          <label className="labell" htmlFor="inputt">
+            Full Name:
+          </label>
+          <strong
+            className="inputt"
+            value={userData.fullname || "N/A"}
+            readOnly
+          />
+        </p>
+        <p className="p">
+          <label className="labell" htmlFor="inputt">
+            Email:
+          </label>
+          <strong className="inputt" value={userData.email || "N/A"} readOnly />
+        </p>
+
+        <p className="p-p">
+          <label className="labell" htmlFor="inputt">
+            Address:
+          </label>
+          <strong
+            className="inputt"
+            value={userData.address || "N/A"}
+            readOnly
+          />
+        </p>
+        <p className="p-p">
+          <label className="labell" htmlFor="inputt">
+            Contact:
+          </label>
+          <strong
+            className="inputt"
+            value={userData.contactNo || "N/A"}
+            readOnly
+          />
+        </p>
       </div>
     </div>
   );

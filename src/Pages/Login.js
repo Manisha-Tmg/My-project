@@ -30,7 +30,7 @@ const Login = () => {
 
       if (userData.success) {
         setLoading(false);
-        alert(userData.message);
+        // alert(userData.message);
         setEmail("");
         setPassword("");
         localStorage.setItem("accessToken", userData.data.accessToken);
