@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { APIURL } from "../env";
+import "../Css/forgot.css";
 
 const EmailVerification = () => {
   const [message, setMessage] = useState("");
@@ -26,7 +27,7 @@ const EmailVerification = () => {
         const data = await response.json();
         setMessage(data.message);
         setTimeout(() => {
-          navigate("/login"); // Redirect user to login page after successful verification
+          navigate("/login");
         }, 2000);
       } else {
         const errorData = await response.json();

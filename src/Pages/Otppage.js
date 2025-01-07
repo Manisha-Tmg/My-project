@@ -1,21 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Css/otp.css";
 import { APIURL } from "../env";
 
 const OtpVerification = () => {
-  const [otp, setOtp] = useState("");
+  const [otp, setOtp] = useState(new Array(6).fill(""));
+
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+
+  const inputRefs = useRef([]);
+
   const navigate = useNavigate();
 
-  const handleVerifyOtp = async (event) => {
-    event.preventDefault();
-    setErrorMsg(""); // Clear previous errors
-    setSuccessMsg(""); // Clear previous success messages
+  const handleInputChange = (e, index) => {
+    const value = e.target.value;
 
-    // Validate OTP: It must be 6 digits and numeric
-    if (!/^\d{6}$/.test(otp)) {
+    if (/^[0-9]$/.test(value)) {
+      const newOtp = [...otp];
+      newOtp[index] = value;
+      setOtp(newOtp);
+
+      if (index < otp.length - 1) {
+        inputRefs.current[index + 1].focus();
+      }
+    }
+
+    if (value === "") {
+      const newOtp = [...otp];
+      newOtp[index] = "";
+      setOtp(newOtp);
+    }
+  };
+
+  const handleKeyDown = (e, index) => {
+    if (e.key === "Backspace" && !otp[index] && index > 0) {
+      inputRefs.current[index - 1].focus();
+    }
+  };
+
+  const handleVerifyOtp = async (e) => {
+    e.preventDefault();
+    setErrorMsg("");
+    setSuccessMsg("");
+
+    const otpString = otp.join("");
+
+    if (otpString.length !== 6 || !/^\d{6}$/.test(otpString)) {
       setErrorMsg("Please enter a valid 6-digit OTP.");
       return;
     }
@@ -27,16 +58,14 @@ const OtpVerification = () => {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify({ otp, email: "Manisha35@gmail.com" }),
+        body: JSON.stringify({ otp: otpString, email: "" }),
       });
 
       const data = await response.json();
 
       if (data.success) {
         setSuccessMsg("OTP verified successfully!");
-        setTimeout(() => {
-          navigate("/login"); // Redirect to the Login page if verification was successful
-        }, 1000);
+        setTimeout(() => navigate("/login"), 1000);
       } else {
         setErrorMsg(data.message || "Invalid OTP. Please try again.");
       }
@@ -50,18 +79,23 @@ const OtpVerification = () => {
       <form className="otp-verification-form" onSubmit={handleVerifyOtp}>
         <h2 className="otp-header">OTP Verification</h2>
         <p className="otp-instructions">
-          Please enter the OTP sent to your email or phone.
+          Please enter the OTP sent to your email.
         </p>
 
-        <input
-          type="text"
-          className="form-control otp-input"
-          placeholder="Enter OTP"
-          value={otp}
-          maxLength="6" // Restrict input to 6 characters
-          pattern="\d*" // Allow only numeric input
-          onChange={(e) => setOtp(e.target.value)}
-        />
+        <div className="otp-input-container">
+          {otp.map((_, index) => (
+            <input
+              key={index}
+              type="text"
+              className="otp-input"
+              maxLength="1"
+              value={otp[index]}
+              onChange={(e) => handleInputChange(e, index)}
+              onKeyDown={(e) => handleKeyDown(e, index)}
+              ref={(el) => (inputRefs.current[index] = el)}
+            />
+          ))}
+        </div>
 
         {errorMsg && <p className="error-message">{errorMsg}</p>}
         {successMsg && <p className="success-message">{successMsg}</p>}

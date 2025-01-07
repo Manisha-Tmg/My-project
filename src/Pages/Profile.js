@@ -57,41 +57,34 @@ const Profile = () => {
   }
 
   return (
-    <div className="profile">
+    <div className="profile-page">
       <h2>Profile</h2>
       <div className="user-detail-card">
-        <p className="p-p">
-          <label className="labell" htmlFor="inputt">
-            Full Name:
-          </label>
-          <strong
+        <p style={{ justifyContent: "flex-start" }}>
+          Full Name:
+          <input
             className="inputt"
             value={userData.fullname || "N/A"}
             readOnly
           />
         </p>
-        <p className="p">
-          <label className="labell" htmlFor="inputt">
-            Email:
-          </label>
-          <strong className="inputt" value={userData.email || "N/A"} readOnly />
+
+        <p>
+          Email:
+          <input className="inputt" value={userData.email || "N/A"} readOnly />
         </p>
 
-        <p className="p-p">
-          <label className="labell" htmlFor="inputt">
-            Address:
-          </label>
-          <strong
+        <p>
+          Address:
+          <input
             className="inputt"
             value={userData.address || "N/A"}
             readOnly
           />
         </p>
-        <p className="p-p">
-          <label className="labell" htmlFor="inputt">
-            Contact:
-          </label>
-          <strong
+        <p>
+          Contact:
+          <input
             className="inputt"
             value={userData.contactNo || "N/A"}
             readOnly
