@@ -1,0 +1,71 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: DM Sans;
+  cursor: pointer;
+}
+
+.ComplaintDetails-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+.complaint-details-container {
+  flex: 1;
+  padding: 20px;
+  background-color: #173542;
+  overflow-y: auto;
+}
+
+.complaint-details-header {
+  display: inline;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #ffffff;
+}
+
+.back-icon {
+  cursor: pointer;
+  margin-top: 2px;
+  margin-right: 5px;
+  color: #ffffff;
+}
+
+.detailstable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.complain-edit-icon {
+  color: #ffffff;
+  cursor: pointer;
+  margin-left: 940px;
+  width: 25px;
+  height: 25px;
+}
+.detailstable th,
+.detailstable td {
+  padding: 12px 20px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #6f6a6a;
+  text-align: left;
+}
+
+.details-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.complaint-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}

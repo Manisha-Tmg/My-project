@@ -1,0 +1,110 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: DM Sans;
+}
+
+.complain-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+.complaint-table-container {
+  flex: 1;
+  padding: 20px;
+  background-color: #173542;
+  overflow-y: auto;
+}
+.complain-container {
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.complain-search-input {
+  display: inline;
+  border-radius: 10px;
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #b0c4c9;
+  border-radius: 5px;
+  margin: 15px 15px 10px 10px;
+  font-size: 16px;
+}
+
+.filter-button {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 5px;
+  color: #000000;
+  margin: 15px 15px 10px 10px;
+  cursor: pointer;
+  border: 1px solid #b0c4c9;
+  gap: 8px;
+  margin-right: 65%;
+  padding: 10px;
+}
+
+.complaint-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #1f404d;
+  color: #ffffff;
+  border-radius: 5px;
+  overflow: hidden;
+  gap: 8px;
+}
+
+.complaint-table th,
+.complaint-table td {
+  border-bottom: 1px solid #302f2f;
+  color: black;
+  background-color: #ffffff;
+
+  text-align: left;
+  padding: 10px;
+}
+
+.complaint-table th {
+  border-bottom: 1px solid #302f2f;
+  border-top: 1px solid #302f2f;
+  color: black;
+  background-color: #ffffff;
+
+  text-align: left;
+  padding: 10px;
+}
+
+.action-button {
+  background: transparent;
+  border: none;
+  color: #000000;
+  cursor: pointer;
+}
+
+.action-button:hover {
+  color: #ffffff;
+}
+.complain-pagination {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.complain-pagination button {
+  border: 1px solid #b0c4c9;
+  color: #000000;
+  padding: 10px;
+  margin: 15px 15px 10px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.complain-pagination button:hover {
+  background-color: #3a5e6a;
+}
