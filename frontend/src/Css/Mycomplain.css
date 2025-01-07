@@ -1,0 +1,42 @@
+.complaints-container {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.complaints-header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #003366;
+  margin-bottom: 16px;
+}
+
+.complaint-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.complaint-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.complaint-label {
+  font-weight: bold;
+  color: #555555;
+}
+
+.complaint-value {
+  color: #333333;
+  text-align: right;
+}
+
+.complaint-row:last-child {
+  border-bottom: none;
+}
