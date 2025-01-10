@@ -1,56 +1,66 @@
-.password-reset-container {
+.email-verification {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: #0e2f3c;
-  padding: 20px;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
-.password-reset-title {
-  font-size: 2rem;
-  color: #ffffff;
-  margin-bottom: 20px;
-}
-
-.password-input {
+.div-verification {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  width: 100%;
+  padding: 30px;
+  border-radius: 8px;
   max-width: 400px;
-  padding: 12px;
+  width: 100%;
+  margin-bottom: 95px;
+}
+.iconnn {
+  font-size: 24px;
+  color: #ffffff;
+  cursor: pointer;
+  position: absolute;
+}
+
+.titlle {
+  font-size: 22px;
+  font-weight: 600;
+  margin-top: 40px;
+}
+
+.icons {
+  font-size: 14px;
+  color: #ffffff;
+  text-align: center;
+}
+.forgot-input {
+  margin-top: 95px;
   margin-bottom: 15px;
-  font-size: 1rem;
-  border-radius: 5px;
-  border: 2px solid rgb(123, 123, 123);
-  color: #ffffff;
-  justify-content: left;
-}
-
-.password-reset-form {
-  display: flex;
-  flex-direction: column;
   width: 100%;
-  max-width: 400px;
+  outline: none;
+  padding: 10px;
+  color: black;
+  border: 2px solid #ffffff;
+  font-size: 16px;
+  border-radius: 10px;
+  background-color: var(--inputbg);
 }
 
-.submit-button {
+.forgot-button {
+  background-color: var(--buttoncolor);
+  border: 2px solid var(--buttoncolor);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
   width: 100%;
-  max-width: 400px;
-  padding: 15px 15px 15px 15px;
-  font-weight: bold;
-  display: flex;
-  background-color: #a02219;
-  align-content: center;
-  border: 2px solid #a02219;
-  border-radius: 5px;
-  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 10px;
 }
 
-.btn {
-  display: flex;
-  margin-bottom: 5px;
-  margin-left: 30%;
+.forgot-button:hover {
+  background-color: var(--buttonhover);
+  /* border: 2px solid #e82f22; */
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { FaEdit } from "react-icons/fa";
 import "../Css/Complaindetails.css";
@@ -11,6 +11,7 @@ const ComplaintDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { id } = useParams();
+  const location = useLocation();
 
   useEffect(() => {
     fetchComplaintDetails();
@@ -18,16 +19,15 @@ const ComplaintDetails = () => {
 
   async function fetchComplaintDetails() {
     try {
-      const token = localStorage.getItem("accessToken");
+      const params = new URLSearchParams(location.search);
+      const id = params.get("id");
       const res = await fetch(`${APIURL}/api/v1/admin/complaints/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: `Bearer ${token}`,
         },
       });
-      console.log({ Authorization: `Bearer ${token}` });
       if (!res.ok) throw new Error(`Error: ${res.status}`);
       const data = await res.json();
       setComplaint(data.data);

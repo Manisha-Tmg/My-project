@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../Css/Login.css";
-import { FaRegEye } from "react-icons/fa";
-import { FaRegEyeSlash } from "react-icons/fa";
+// import { FaRegEye } from "react-icons/fa";
+// import { FaRegEyeSlash } from "react-icons/fa";
 import { APIURL } from "../env";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showHide, setShowHide] = useState(false);
+  // const [showHide, setShowHide] = useState(false);
   const [sucess, SetSucess] = useState(null);
   const [err, setErr] = useState("");
   const navigate = useNavigate();
@@ -31,20 +31,22 @@ const Login = () => {
       const userData = await res.json();
 
       if (userData.success) {
-        setLoading(false);
-        SetSucess(userData.message);
-        setEmail("");
-        setPassword("");
-        localStorage.setItem("accessToken", userData.data.accessToken);
-        localStorage.setItem("token", userData.data.token);
-        navigate("/complain");
+        const userRole = userData.data?.role;
+        if (userRole === "USER") {
+          setLoading(false);
+          SetSucess(userData.message);
+          setEmail("");
+          setPassword("");
+          localStorage.setItem("accessToken", userData.data.accessToken);
+          localStorage.setItem("token", userData.data.token);
+          navigate("/complain");
+        }
       } else {
         setErr(userData.message);
         setLoading(false);
       }
     } catch (error) {
       setLoading(false);
-      // alert("An error occurred during login. Please try again.");
     }
   }
 
@@ -91,7 +93,7 @@ const Login = () => {
         </div>
 
         <div className="remember-forgot">
-          <Link id="forgot" to={"/forgot"}>
+          <Link id="forgot" to={"/forgot-password"}>
             Forgot Password?
           </Link>
         </div>

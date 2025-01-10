@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../Css/Dropdown.css";
 
 const Dropdown = () => {
   const [isLogin, setIsLogin] = useState(false);
+  const location = useLocation();
+
   const signUpLocation = location.pathname;
   const otpLocation = location.pathname;
   const forgotLocation = location.pathname;
@@ -29,6 +31,7 @@ const Dropdown = () => {
       }
     }
   }, [navigate, signUpLocation]);
+
   const handleLogout = () => {
     const confirmCheck = window.confirm("Are you sure want to logout?");
     if (confirmCheck) {
@@ -41,15 +44,34 @@ const Dropdown = () => {
 
   return (
     <div className="dropdown-list">
-      <Link to={"/"}>
-        <li className="drop-home">Home</li>
-      </Link>
-      <Link to={"/Aboutus"}>
-        <li className="drop-about">About Us</li>
-      </Link>
-      <Link to={"/contact"}>
-        <li className="drop-contact">Contact</li>
-      </Link>
+      {isLogin ? (
+        <Link to={"/"}>
+          <li className="drop-home">Home</li>
+        </Link>
+      ) : (
+        <span>
+          <li className="drop-home">Home</li>
+        </span>
+      )}
+      {isLogin ? (
+        <Link to={"/Aboutus"}>
+          <li className="drop-about">About Us</li>
+        </Link>
+      ) : (
+        <span>
+          <li className="drop-about">About Us</li>
+        </span>
+      )}
+      {isLogin ? (
+        <Link to={"/contact"}>
+          <li className="drop-contact">Contact</li>
+        </Link>
+      ) : (
+        <span>
+          <li className="drop-contact">Contact</li>
+        </span>
+      )}
+
       {isLogin ? (
         <Link
           onClick={handleLogout}

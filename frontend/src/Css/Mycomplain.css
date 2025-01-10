@@ -1,20 +1,26 @@
 .complaints-container {
-  font-family: Arial, sans-serif;
-  margin: 20px;
+  /* margin: 20px; */
+  margin-top: 15%;
   padding: 20px;
   background-color: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .complaints-header {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #003366;
+  color: #000000;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #ffffff;
+
   margin-bottom: 16px;
 }
 
 .complaint-details {
+  background-color: #ffffff;
+
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -22,18 +28,22 @@
 
 .complaint-row {
   display: flex;
+  background-color: #ffffff;
+  color: #000000;
   justify-content: space-between;
   padding: 8px 0;
   border-bottom: 1px solid #e0e0e0;
 }
 
 .complaint-label {
+  background-color: #ffffff;
+
   font-weight: bold;
-  color: #555555;
+  color: #000000;
 }
 
 .complaint-value {
-  color: #333333;
+  color: #000000;
   text-align: right;
 }
 

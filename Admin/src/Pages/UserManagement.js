@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useNavigate } from "react";
 import "../Css/UserManagement.css";
 import { FaRegEye } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
@@ -9,6 +9,11 @@ import { APIURL } from "../env";
 const UserManagement = () => {
   const [users, setUsers] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
+  const navigate = useNavigate;
+
+  const handleView = (user.id) => {
+    navigate(`/user`);
+  };
 
   useEffect(() => {
     async function fetchUsers() {
@@ -25,7 +30,7 @@ const UserManagement = () => {
 
         const data = await res.json();
         if (data.success) {
-          setUsers(data.data || []); // Assuming `data.data` contains the array of users
+          setUsers(data.data || []);
         } else {
           setErrorMsg(data.message || "Failed to fetch user data.");
         }
@@ -62,10 +67,10 @@ const UserManagement = () => {
                   users.map((user, index) => (
                     <tr key={user.id}>
                       <td>{index + 1}</td>
-                      <td>{user.name || "N/A"}</td>
-                      <td>{user.trackingId || "N/A"}</td>
+                      <td>{user.fullname || "N/A"}</td>
+                      <td>{user.id || "N/A"}</td>
                       <td>
-                        <button className="view-button">
+                        <button className="view-button" onClick={handleView}>
                           <FaRegEye />
                         </button>
                       </td>

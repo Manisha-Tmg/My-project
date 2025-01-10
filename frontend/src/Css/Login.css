@@ -53,11 +53,6 @@
   background-color: var(--inputbg);
 }
 
-/* .logform-control:focus {
-  border-color: #ffffff;
-  outline: none;
-} */
-
 .remember-forgot {
   display: flex;
   justify-content: flex-end;

@@ -1,47 +1,53 @@
-import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { APIURL } from "../env";
 import "../Css/forgot.css";
 
 const EmailVerification = () => {
   const [message, setMessage] = useState("");
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
-  const location = useLocation();
 
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const token = params.get("token");
-
-    if (token) {
-      verifyEmail(token);
-    }
-  }, [location]);
-
-  const verifyEmail = async (token) => {
+  const verifyEmail = async () => {
     try {
-      const response = await fetch(`${APIURL}/verify-email?token=${token}`, {
-        method: "GET",
+      const response = await fetch(`${APIURL}/api/v1/auth/forgot-password`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ email }),
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        setMessage(data.message);
-        setTimeout(() => {
-          navigate("/login");
-        }, 2000);
+      const data = await response.json();
+
+      if (data.success) {
+        navigate("/login");
+        setMessage("Link send to your email");
       } else {
-        const errorData = await response.json();
-        setMessage(errorData.message);
+        setMessage("error verifing email");
       }
-    } catch (error) {
-      setMessage("An error occurred during verification.");
-    }
+    } catch (error) {}
   };
 
   return (
-    <div>
-      <h2>Email Verification</h2>
-      <p>{message}</p>
+    <div className="email-verification">
+      <div className="div-verification">
+        <h2>Forgot Password</h2>
+        <p style={{ marginTop: "15px" }}>
+          Please enter your email to reset the password
+        </p>
+        <input
+          className="forgot-input"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        ></input>
+        <p>{message}</p>
+        <button className="forgot-button" onClick={verifyEmail}>
+          Submit
+        </button>
+      </div>
     </div>
   );
 };

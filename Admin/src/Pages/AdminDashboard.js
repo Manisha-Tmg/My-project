@@ -10,6 +10,7 @@ const AdminDashboard = () => {
     totalComplaintsPending: 0,
     totalComplaintsInProgress: 0,
     totalComplaintsResolved: 0,
+    totalComplaintsRejected: 5,
   });
 
   const [loading, setLoading] = useState(true);
@@ -26,7 +27,6 @@ const AdminDashboard = () => {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      console.log({ Authorization: `Bearer ${accessToken}` });
       if (!res.ok) {
         throw new Error(`Error: ${res.status}`);
       }
@@ -79,6 +79,11 @@ const AdminDashboard = () => {
               <div className="icon">✅</div>
               <p className="text">Resolved</p>
               <p className="number">{dashboardData.totalComplaintsResolved}</p>
+            </div>
+            <div className="card">
+              <div className="icon">❌</div>
+              <p className="text">Rejected</p>
+              <p className="number">{dashboardData.totalComplaintsRejected}</p>
             </div>
           </div>
         )}

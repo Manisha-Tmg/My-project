@@ -23,7 +23,7 @@ const OtpVerification = () => {
     if (tokenParam) {
       setToken(tokenParam);
     } else {
-      // setErrorMsg("Verification token is missing. Please request a new OTP.");
+      setErrorMsg("Verification token is missing. Please request a new OTP.");
     }
 
     if (emailParam) {
@@ -69,23 +69,31 @@ const OtpVerification = () => {
       return;
     }
 
+    if (!token) {
+      setErrorMsg("Verification token is missing. Please request a new OTP.");
+      return;
+    }
+
     try {
-      const response = await fetch(`${APIURL}/api/v1/auth/verify-user`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          otp: otpString,
-          email,
-          token, // Send the token in the body
-        }),
-      });
+      const response = await fetch(
+        `${APIURL}/api/v1/auth/verify-user?token=${token}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            otp: otpString,
+            email,
+          }),
+        }
+      );
 
       const data = await response.json();
 
       if (data.success) {
         setSuccessMsg("OTP verified successfully!");
+
         setTimeout(() => navigate("/login"), 1500);
       } else {
         setErrorMsg(data.message || "Invalid OTP. Please try again.");

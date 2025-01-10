@@ -12,8 +12,8 @@ function App() {
       <Routes>
         <Route path="/dashboard" element={<AdminDashboard />}></Route>
         <Route path="/users" element={<UserManagement />}></Route>
-        <Route path="//user/{id}" element={<UserDetails />}></Route>
-        <Route path="/complaint/{id}" element={<ComplainDetails />}></Route>
+        <Route path="/user" element={<UserDetails />}></Route>
+        <Route path="/complaint" element={<ComplainDetails />}></Route>
         <Route path="/complaints" element={<ComplainManagement />}></Route>
         <Route path="/Login" element={<Login />}></Route>
       </Routes>

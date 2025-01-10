@@ -4,8 +4,8 @@ import { FaEye } from "react-icons/fa";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { CiFilter } from "react-icons/ci";
 import "../Css/Complainmanagement.css";
-import SideBar from "../Component/Side";
 import { APIURL } from "../env";
+import SideBar from "../Component/Side";
 
 const ComplaintTable = () => {
   const [complaints, setComplaints] = useState([]);
@@ -44,7 +44,7 @@ const ComplaintTable = () => {
   }, [fetchComplaints]);
 
   const handleView = (id) => {
-    navigate(`/complaints/${id}`);
+    navigate(`/complaint`);
   };
 
   const handleSearch = (e) => {
@@ -92,10 +92,10 @@ const ComplaintTable = () => {
               {complaints.map((complaint, index) => (
                 <tr key={complaint.id}>
                   <td>{(page - 1) * 10 + index + 1}</td>
-                  <td>{complaint.title}</td>
-                  <td>{complaint.category}</td>
+                  <td>{complaint.complaintTitle}</td>
+                  <td>{complaint.categoryName}</td>
                   <td>{complaint.location}</td>
-                  <td>{complaint.userName}</td>
+                  <td>{complaint.fullname}</td>
                   <td>{new Date(complaint.createdAt).toLocaleDateString()}</td>
                   <td>{complaint.status}</td>
                   <td>

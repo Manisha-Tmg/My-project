@@ -4,6 +4,7 @@ import Aboutus from "./Pages/Aboutus";
 import Changepassword from "./Pages/Changepassword";
 import Complain from "./Pages/Complain";
 import Contact from "./Pages/Contact";
+import Forgotpassword from "./Pages/Forgotpassword";
 import Form from "./Pages/Form";
 import Login from "./Pages/Login";
 import Mycomplain from "./Pages/Mycomplain";
@@ -24,12 +25,13 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/aboutus" element={<Aboutus />} />
         <Route path="/form" element={<Form />} />
-        <Route path="/my-complain" element={<Mycomplain />} />
+        <Route path="/complaints" element={<Mycomplain />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/forgot-password" element={<Passwordreset />} />
         <Route path="/province" element={<Province />} />
         <Route path="/verify-user" element={<Otppage />} />
-        <Route path="/reset-password" element={<Changepassword />} />
+        <Route path="/change-password" element={<Changepassword />} />
+        <Route path="/reset-password" element={<Forgotpassword />} />
       </Routes>
     </Router>
   );

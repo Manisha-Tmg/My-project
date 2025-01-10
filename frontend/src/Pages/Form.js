@@ -7,11 +7,11 @@ import ProvinceDistrictSelector from "../Components/Province";
 const ComplaintForm = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
-
   const grievanceType = state?.grievanceType || "";
 
   const [formData, setFormData] = useState({
     complaintTitle: "",
+
     provinceId: "",
     districtId: "",
     tole: "",
@@ -80,11 +80,11 @@ const ComplaintForm = () => {
         complaintTitle: formData.complaintTitle.trim(),
         description: formData.description.trim(),
         categoryName: formData.categoryName,
-        locations: {
-          provinceId: parseInt(formData.provinceId) || null, //changing string into int as per the need of the backend
-          districtId: parseInt(formData.districtId) || null, //changing string into int as per the need of the backend
-          ward: formData.ward.trim(),
-          tole: formData.tole.trim(),
+        location: {
+          tole: formData.tole,
+          ward: parseInt(formData.ward, 10),
+          provinceId: parseInt(formData.provinceId, 10),
+          districtId: parseInt(formData.districtId, 10),
         },
         attachments: formData.file.map((file) => ({ url: file.name })),
         anonymous: false,
@@ -92,8 +92,8 @@ const ComplaintForm = () => {
 
       // Validate location data before sending
       if (
-        !requestBody.locations.provinceId ||
-        !requestBody.locations.districtId
+        !requestBody.location.provinceId ||
+        !requestBody.location.districtId
       ) {
         throw new Error("Province and District are required");
       }
@@ -131,7 +131,6 @@ const ComplaintForm = () => {
         );
         if (result.errors) {
           console.error("Validation errors:", result.errors);
-          // Map backend errors to form fields
           const backendErrors = {};
           result.errors.forEach((error) => {
             if (error.includes("district")) {
@@ -202,7 +201,7 @@ const ComplaintForm = () => {
               setFormData((prev) => ({
                 ...prev,
                 provinceId: id,
-                districtId: "",
+                districtId: "", // Reset district when province changes
               }));
               setErrors({ ...errors, provinceId: "", districtId: "" });
             }}
