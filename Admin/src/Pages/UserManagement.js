@@ -2,20 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Css/UserManagement.css";
 import { FaRegEye } from "react-icons/fa";
-import { IoIosArrowBack } from "react-icons/io";
-import { IoIosArrowForward } from "react-icons/io";
 import SideBar from "../Component/Side";
 import { APIURL } from "../env";
+import Pagination from "../Component/Pagination";
 
 const UserManagement = () => {
   const [users, setUsers] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
-
-  const id = localStorage.getItem("id");
-  const handleViewDetails = () => {
-    navigate(`/user/${id}`);
-  };
 
   useEffect(() => {
     async function fetchUsers() {
@@ -32,7 +26,7 @@ const UserManagement = () => {
 
         const data = await res.json();
         if (data.success) {
-          setUsers(data.data || []); // Assuming `data.data` contains the array of users
+          setUsers(data.data || []);
         } else {
           setErrorMsg(data.message || "Failed to fetch user data.");
         }
@@ -42,6 +36,10 @@ const UserManagement = () => {
     }
     fetchUsers();
   }, []);
+
+  const handleViewDetails = (id) => {
+    navigate(`/user/${id}`);
+  };
 
   return (
     <div className="user-management-container">
@@ -72,11 +70,11 @@ const UserManagement = () => {
                       <td>{user.fullname || "N/A"}</td>
                       <td>{user.id || "N/A"}</td>
                       <td>
-                        <button className="view-button">
-                          <FaRegEye
-                            onClick={() => handleViewDetails(user.id)}
-                            style={{ cursor: "pointer" }}
-                          />
+                        <button
+                          className="view-button"
+                          onClick={() => handleViewDetails(user.id)}
+                        >
+                          <FaRegEye style={{ cursor: "pointer" }} />
                         </button>
                       </td>
                     </tr>
@@ -90,14 +88,7 @@ const UserManagement = () => {
                 )}
               </tbody>
             </table>
-            <div className="pagination">
-              <button>
-                <IoIosArrowBack />
-              </button>
-              <button>
-                <IoIosArrowForward />
-              </button>
-            </div>
+            <Pagination />
           </div>
         </div>
       </div>

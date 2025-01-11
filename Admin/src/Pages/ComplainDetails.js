@@ -10,7 +10,7 @@ const ComplaintDetails = () => {
   const [complaint, setComplaint] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { id } = useParams();
+  const { complaintId } = useParams();
   const location = useLocation();
 
   useEffect(() => {
@@ -20,14 +20,17 @@ const ComplaintDetails = () => {
   async function fetchComplaintDetails() {
     try {
       const params = new URLSearchParams(location.search);
-      const id = params.get("id");
-      const res = await fetch(`${APIURL}/api/v1/admin/complaints/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      });
+      const complaintId = params.get("complaintId");
+      const res = await fetch(
+        `${APIURL}/api/v1/admin/complaint/${complaintId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
       if (!res.ok) throw new Error(`Error: ${res.status}`);
       const data = await res.json();
       setComplaint(data.data);
