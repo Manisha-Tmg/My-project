@@ -110,12 +110,12 @@ const Navbar = () => {
           </li>
           <li>
             {isLogin ? (
-              <Link to="/reset-password" className="passwordchange">
+              <Link to="/change-password" className="passwordchange">
                 Changepassword
               </Link>
             ) : (
               <span>
-                <Link to="/reset-password" className="passwordchange">
+                <Link to="/change-password" className="passwordchange">
                   Changepassword
                 </Link>
               </span>

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { APIURL } from "../env";
 import "../Css/Mycomplain.css";
+
 const Mycomplain = () => {
-  const [complaints, setComplaint] = useState(null);
+  const [complaints, setComplaints] = useState([]);
   const [error, setError] = useState("");
 
   async function handleComplaints() {
@@ -20,7 +21,8 @@ const Mycomplain = () => {
 
       if (res.ok) {
         const result = await res.json();
-        setComplaint(result.data);
+        console.log("API Response:", result.data);
+        setComplaints(result.data);
       } else {
         setError("Failed to fetch complaints. Please try again.");
       }
@@ -37,33 +39,33 @@ const Mycomplain = () => {
     return <p style={{ color: "red" }}>{error}</p>;
   }
 
-  if (!complaint) {
+  if (!complaints) {
     return <p>Loading...</p>;
   }
 
   return (
     <div className="complaints-container">
-      <h2 className="complaints-header">My complaints</h2>
+      <h2 className="complaints-header">My Complaints</h2>
       {complaints.map((complaint) => (
-        <div className="complaint-details">
+        <div key={complaint.complaintId} className="complaint-details">
           <div className="complaint-row">
-            <span className="complaint-label">ComplainId:</span>
+            <span className="complaint-label">Complaint ID:</span>
             <span className="complaint-value">{complaint.complaintId}</span>
-          </div>{" "}
+          </div>
           <div className="complaint-row">
-            <span className="complaint-label">Complain Title:</span>
+            <span className="complaint-label">Complaint Title:</span>
             <span className="complaint-value">{complaint.complaintTitle}</span>
           </div>
           <div className="complaint-row">
-            <span className="complaint-label">Grievance type:</span>
+            <span className="complaint-label">Grievance Type:</span>
             <span className="complaint-value">{complaint.categoryName}</span>
-          </div>{" "}
+          </div>
           <div className="complaint-row">
             <span className="complaint-label">Location:</span>
             <span className="complaint-value">{complaint.location}</span>
-          </div>{" "}
+          </div>
           <div className="complaint-row">
-            <span className="complaint-label">Full name:</span>
+            <span className="complaint-label">Full Name:</span>
             <span className="complaint-value">{complaint.fullname}</span>
           </div>
           <div className="complaint-row">
@@ -73,7 +75,7 @@ const Mycomplain = () => {
           <div className="complaint-row">
             <span className="complaint-label">Date:</span>
             <span className="complaint-value">
-              {new Date(complaint.createdAt).toLocaleDateString()}
+              {new Date(complaint.createdAt).toLocaleString()}
             </span>
           </div>
         </div>
