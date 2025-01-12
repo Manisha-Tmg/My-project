@@ -6,7 +6,6 @@ import "../Css/UserDetails.css";
 import SideBar from "../Component/Side";
 import { APIURL } from "../env";
 import { format } from "date-fns";
-import DetailRow from "../Component/DetailRow";
 
 const Loader = () => (
   <div className="loader">
@@ -76,7 +75,10 @@ const UserDetails = () => {
       <div className="user-details-container">
         <h3 className="user-details-header">
           <Link to="/users">
-            <IoIosArrowBack className="user-header-icon" />
+            <IoIosArrowBack
+              className="user-header-icon"
+              style={{ color: "white", height: "30", width: "30" }}
+            />
           </Link>
           <span>User Details</span>
         </h3>
@@ -87,24 +89,42 @@ const UserDetails = () => {
               className="edit-icon"
               onClick={() => navigate(`/admin/editUser/${user.id}`)}
             />
-            <DetailRow label="Name" value={user.fullname} />
-            <DetailRow
-              label="Contact Number"
-              value={user.contact.primaryNumber}
-            />
-            <DetailRow
-              label="Secondary Contact"
-              value={user.contact.secondaryNumber}
-            />
-            <DetailRow label="Email" value={user.email} />
-            <DetailRow label="Province" value={user.address.province} />
-            <DetailRow label="District" value={user.address.district} />
-            <DetailRow label="Tole" value={user.address.tole} />
-            <DetailRow label="Ward no." value={user.address.ward} />
-            <DetailRow
-              label="Date"
-              value={format(new Date(user.createdAt), "dd/MM/yyyy")}
-            />
+            <table className="detailstable">
+              <tbody>
+                <tr>
+                  <th>Name</th>
+                  <td>{user.fullname}</td>
+                </tr>
+                <tr>
+                  <th>Contact</th>
+                  <td>{user.contact.primaryNumber}</td>
+                </tr>
+                <tr>
+                  <th>Email</th>
+                  <td>{user.email}</td>
+                </tr>
+                <tr>
+                  <th>Date</th>
+                  <td>{format(new Date(user.createdAt), "dd/MM/yyyy")}</td>
+                </tr>
+                <tr>
+                  <th>Province</th>
+                  <td>{user.address.province}</td>
+                </tr>
+                <tr>
+                  <th>Ward no.</th>
+                  <td>{user.address.ward}</td>
+                </tr>
+                <tr>
+                  <th>District</th>
+                  <td>{user.address.district}</td>
+                </tr>
+                <tr>
+                  <th>Tole</th>
+                  <td>{user.address.tole}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         ) : (
           <div>No user data available</div>

@@ -1,45 +1,61 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { FaEdit } from "react-icons/fa";
 import "../Css/Complaindetails.css";
 import SideBar from "../Component/Side";
 import { APIURL } from "../env";
+import { format } from "date-fns";
 
 const ComplaintDetails = () => {
   const [complaint, setComplaint] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { complaintId } = useParams();
-  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetchComplaintDetails();
-  }, [id]);
+    const fetchUserDetails = async () => {
+      try {
+        const token = localStorage.getItem("accessToken");
+        const res = await fetch(
+          `${APIURL}/api/v1/admin/complaint/${complaintId}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
-  async function fetchComplaintDetails() {
-    try {
-      const params = new URLSearchParams(location.search);
-      const complaintId = params.get("complaintId");
-      const res = await fetch(
-        `${APIURL}/api/v1/admin/complaint/${complaintId}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
+        if (!res.ok) {
+          throw new Error(
+            res.status === 404
+              ? "User not found"
+              : "Failed to fetch user details"
+          );
         }
-      );
-      if (!res.ok) throw new Error(`Error: ${res.status}`);
-      const data = await res.json();
-      setComplaint(data.data);
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
-  }
+
+        const data = await res.json();
+        if (data.success && data.data) {
+          setComplaint(data.data);
+          console.log(data);
+        } else {
+          throw new Error(data.message || "Failed to load user data");
+        }
+      } catch (err) {
+        setError(err.message);
+        if (err.message === "User not found") {
+          setTimeout(() => navigate("/users"), 3000);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserDetails();
+  }, [complaintId, navigate]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -51,7 +67,10 @@ const ComplaintDetails = () => {
       <div className="complaint-details-container">
         <h3 className="complaint-details-header">
           <Link to="/complaints">
-            <IoIosArrowBack className="back-icon" />
+            <IoIosArrowBack
+              className="back-icon"
+              style={{ height: "30", width: "30" }}
+            />
           </Link>
           Complaint Details
         </h3>
@@ -60,23 +79,31 @@ const ComplaintDetails = () => {
           <tbody>
             <tr>
               <th>Grievance type</th>
-              <td>{complaint.grievanceType}</td>
+              <td>{complaint.categoryName}</td>
+            </tr>
+            <tr>
+              <th>Complaint Id</th>
+              <td>{complaint.complaintId}</td>
+            </tr>
+            <tr>
+              <th>Complaint Title</th>
+              <td>{complaint.complaintTitle}</td>
+            </tr>
+            <tr>
+              <th>Date</th>
+              <td>{format(new Date(complaint.createdAt), "dd/MM/yyyy")}</td>
             </tr>
             <tr>
               <th>Province</th>
-              <td>{complaint.province}</td>
-            </tr>
-            <tr>
-              <th>Tole</th>
-              <td>{complaint.tole}</td>
+              <td>{complaint.location.Province}</td>
             </tr>
             <tr>
               <th>Ward no.</th>
-              <td>{complaint.wardNo}</td>
+              <td>{complaint.location.ward}</td>
             </tr>
             <tr>
-              <th>Location</th>
-              <td>{complaint.location}</td>
+              <th>District</th>
+              <td>{complaint.location.district}</td>
             </tr>
             <tr>
               <th>Description</th>
@@ -86,18 +113,10 @@ const ComplaintDetails = () => {
               <th>Status</th>
               <td>{complaint.status}</td>
             </tr>
-            {complaint.image && (
-              <tr>
-                <th>Image</th>
-                <td>
-                  <img
-                    src={complaint.image}
-                    alt="Complaint evidence"
-                    className="complaint-image"
-                  />
-                </td>
-              </tr>
-            )}
+            <tr>
+              <th>Attachments</th>
+              <td>{complaint.attachments}</td>
+            </tr>
           </tbody>
         </table>
       </div>

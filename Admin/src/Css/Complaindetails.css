@@ -1,15 +1,17 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: DM Sans;
-  cursor: pointer;
+  box-sizing: border-box;
+  font-family: "DM Sans";
 }
 
 .ComplaintDetails-container {
   display: flex;
   width: 100vw;
   height: 100vh;
+  background-color: #e5e5e5;
 }
+
 .complaint-details-container {
   flex: 1;
   padding: 20px;
@@ -18,19 +20,33 @@
 }
 
 .complaint-details-header {
-  display: inline;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  margin-right: 77%;
   font-size: 24px;
+  font-weight: bold;
   color: #ffffff;
 }
 
 .back-icon {
   cursor: pointer;
-  margin-top: 2px;
-  margin-right: 5px;
+  margin-right: 10px;
   color: #ffffff;
+  font-size: 24px;
+}
+
+.complain-edit-icon {
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 24px;
+  align-self: flex-end;
+  transition: transform 0.2s ease;
+}
+
+.complain-edit-icon:hover {
+  transform: scale(1.1);
 }
 
 .detailstable {
@@ -38,29 +54,27 @@
   border-collapse: collapse;
   margin-top: 20px;
   background-color: #ffffff;
-  color: #000000;
+  color: #333333;
   border-radius: 10px;
   overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.complain-edit-icon {
-  color: #ffffff;
-  cursor: pointer;
-  margin-left: 940px;
-  width: 25px;
-  height: 25px;
-}
 .detailstable th,
 .detailstable td {
   padding: 12px 20px;
-  background-color: #ffffff;
-  border-bottom: 1px solid #6f6a6a;
   text-align: left;
+  border-bottom: 1px solid #e0e0e0;
 }
 
-.details-table th {
-  background-color: #f4f4f4;
+.detailstable th {
+  background-color: #f7f7f7;
   font-weight: bold;
+  color: #444444;
+}
+
+.detailstable tr:last-child td {
+  border-bottom: none; /* Remove border for the last row */
 }
 
 .complaint-image {
@@ -68,4 +82,20 @@
   height: auto;
   border-radius: 5px;
   border: 1px solid #ddd;
+}
+
+@media (max-width: 768px) {
+  .complaint-details-header {
+    font-size: 20px;
+  }
+
+  .complain-edit-icon {
+    margin-left: auto;
+    margin-top: -5px;
+  }
+
+  .detailstable th,
+  .detailstable td {
+    padding: 10px;
+  }
 }

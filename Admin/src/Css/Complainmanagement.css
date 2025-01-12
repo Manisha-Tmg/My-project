@@ -34,9 +34,13 @@
   border-radius: 5px;
   margin: 15px 15px 10px 10px;
   font-size: 16px;
+  outline: none;
+}
+.filter-select {
+  height: 35px;
 }
 
-.filter-button {
+.filter-buttonStatus {
   display: flex;
   align-items: center;
   background-color: #ffffff;
@@ -46,7 +50,20 @@
   cursor: pointer;
   border: 1px solid #b0c4c9;
   gap: 8px;
-  margin-right: 65%;
+  padding: 10px;
+}
+.filter-buttonCategory {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 5px;
+  color: #000000;
+  margin: 15px 0 10px 10px;
+  cursor: pointer;
+  border: 1px solid #b0c4c9;
+  gap: 8px;
+  margin-right: 50%;
+
   padding: 10px;
 }
 

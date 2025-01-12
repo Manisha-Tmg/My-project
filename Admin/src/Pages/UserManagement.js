@@ -10,7 +10,9 @@ const UserManagement = () => {
   const [users, setUsers] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
-
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const [filteredusers, setFilteredusers] = useState([]);
   useEffect(() => {
     async function fetchUsers() {
       try {
@@ -37,6 +39,22 @@ const UserManagement = () => {
     fetchUsers();
   }, []);
 
+  useEffect(() => {
+    let searched = users;
+
+    if (search.trim()) {
+      searched = searched.filter((user) =>
+        user.fullname.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
+    setFilteredusers(searched);
+  }, [search, users]);
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+    setPage(1);
+  };
   const handleViewDetails = (id) => {
     navigate(`/user/${id}`);
   };
@@ -51,6 +69,8 @@ const UserManagement = () => {
               type="text"
               placeholder="Search..."
               className="search-input"
+              value={search}
+              onChange={handleSearch}
             />
             {errorMsg && <p className="error-message">{errorMsg}</p>}
             <table className="admin-user-table">
@@ -63,10 +83,10 @@ const UserManagement = () => {
                 </tr>
               </thead>
               <tbody>
-                {users.length > 0 ? (
-                  users.map((user, index) => (
+                {filteredusers.length > 0 ? (
+                  filteredusers.map((user, index) => (
                     <tr key={user.id}>
-                      <td>{index + 1}</td>
+                      <td>{(page - 1) * 10 + index + 1}</td>
                       <td>{user.fullname || "N/A"}</td>
                       <td>{user.id || "N/A"}</td>
                       <td>

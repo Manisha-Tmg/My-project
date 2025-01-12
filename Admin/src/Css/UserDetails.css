@@ -1,9 +1,12 @@
 .admin-main-contain {
   display: flex;
+  background-color: #173542;
+  color: #ffffff;
 }
 
 .user-details-container {
   margin: 20px;
+
   width: 100%;
 }
 

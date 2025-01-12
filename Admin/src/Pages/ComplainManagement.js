@@ -10,6 +10,8 @@ import SideBar from "../Component/Side";
 const ComplaintManagement = () => {
   const [complaints, setComplaints] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [filteredComplaints, setFilteredComplaints] = useState([]);
+  const [filters, setFilters] = useState({ status: "", category: "" });
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
@@ -48,8 +50,45 @@ const ComplaintManagement = () => {
     fetchComplaints();
   }, [fetchComplaints]);
 
+  useEffect(() => {
+    let filtered = complaints;
+
+    if (search.trim()) {
+      filtered = filtered.filter(
+        (complaint) =>
+          complaint.complaintTitle
+            .toLowerCase()
+            .includes(search.toLowerCase()) ||
+          complaint.categoryName.toLowerCase().includes(search.toLowerCase()) ||
+          complaint.fullname.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
+    if (filters.status) {
+      filtered = filtered.filter(
+        (complaint) => complaint.status === filters.status
+      );
+    }
+    if (filters.category) {
+      filtered = filtered.filter(
+        (complaint) => complaint.categoryName === filters.category
+      );
+    }
+
+    setFilteredComplaints(filtered);
+  }, [search, filters, complaints]);
+
   const handleSearch = (e) => {
     setSearch(e.target.value);
+    setPage(1);
+  };
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [name]: value,
+    }));
     setPage(1);
   };
 
@@ -97,6 +136,9 @@ const ComplaintManagement = () => {
       alert(err.message || "Failed to update status");
     }
   };
+  const handleViewDetails = (complaintId) => {
+    navigate(`/complaint/${complaintId}`);
+  };
 
   if (loading) {
     return (
@@ -140,12 +182,45 @@ const ComplaintManagement = () => {
                 onChange={handleSearch}
               />
             </div>
-            <button className="filter-button">
-              <CiFilter /> Filter
-            </button>
+            <div className="filter-buttonStatus">
+              {" "}
+              <CiFilter style={{ width: "30", height: "30" }} />
+              <select
+                name="status"
+                value={filters.status}
+                onChange={handleFilterChange}
+                className="filter-select"
+              >
+                <option value="">Filter</option>
+                <option value="PENDING">PENDING</option>
+                <option value="IN_PROGRESS">IN PROGRESS</option>
+                <option value="RESOLVED">RESOLVED</option>
+              </select>
+            </div>
+            <div className="filter-buttonCategory">
+              <CiFilter style={{ width: "30", height: "30" }} />
+              <select
+                name="category"
+                value={filters.category}
+                onChange={handleFilterChange}
+                className="filter-select"
+              >
+                <option value="">Filter</option>
+                <option value="ROAD">ROAD</option>
+                <option value="DRAINAGE">DRAINAGE</option>
+                <option value="WATER-SUPPLY">WATER-SUPPLY</option>
+                <option value="STREET-LIGHT">STREET-LIGHT</option>
+                <option value="GARBAGE-COLLECTION">GARBAGE-COLLECTIONT</option>
+                <option value="DOMESTIC-VIOLENCE">DOMESTIC-VIOLENCE</option>
+                <option value="TRAFFIC-VIOLATION">TRAFFIC-VIOLATION</option>
+                <option value="CORRUPTION">CORRUPTION</option>
+                <option value="ELECTRICAL-ISSUES">ELECTRICAL-ISSUES</option>
+                <option value="CHILD-LABOUR">CHILD-LABOUR</option>
+              </select>
+            </div>
           </div>
 
-          {complaints.length === 0 ? (
+          {filteredComplaints.length === 0 ? (
             <div className="no-data">No complaints found</div>
           ) : (
             <table className="complaint-table">
@@ -162,7 +237,7 @@ const ComplaintManagement = () => {
                 </tr>
               </thead>
               <tbody>
-                {complaints.map((complaint, index) => (
+                {filteredComplaints.map((complaint, index) => (
                   <tr key={complaint.complaintId}>
                     <td>{(page - 1) * 10 + index + 1}</td>
                     <td>{complaint.complaintTitle}</td>
@@ -182,12 +257,12 @@ const ComplaintManagement = () => {
                     <td>
                       <select
                         value={complaint.status}
-                        onChange={(e) => {
+                        onChange={(e) =>
                           updateComplaintStatus(
                             complaint.complaintId,
                             e.target.value
-                          );
-                        }}
+                          )
+                        }
                         className="status-select"
                       >
                         <option value="PENDING">PENDING</option>
@@ -198,7 +273,7 @@ const ComplaintManagement = () => {
                     <td>
                       <button
                         className="action-button"
-                        onClick={() => handleView(complaint.complaintId)}
+                        onClick={() => handleViewDetails(complaint.complaintId)}
                       >
                         <FaEye />
                       </button>
@@ -208,7 +283,6 @@ const ComplaintManagement = () => {
               </tbody>
             </table>
           )}
-
           <div className="complain-pagination">
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
@@ -218,7 +292,7 @@ const ComplaintManagement = () => {
             </button>
             <button
               onClick={() => setPage((p) => p + 1)}
-              disabled={complaints.length < 10}
+              disabled={filteredComplaints.length < 10}
             >
               <IoIosArrowForward />
             </button>
