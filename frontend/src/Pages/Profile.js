@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../Css/Profile.css";
 import { APIURL } from "../env";
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchUserData() {
       const token = localStorage.getItem("accessToken");
       if (!token) {
         alert("No token found. Please log in.");
-        window.location.href = "/login";
+        navigate("/login");
         return;
       }
 
@@ -20,15 +22,12 @@ const Profile = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log({ Authorization: `Bearer ${token}` });
 
         if (response.ok) {
           const data = await response.json();
-          console.log("Fetched Data:", data);
           if (data.success) {
             setUserData(data.data);
           } else {
@@ -46,7 +45,7 @@ const Profile = () => {
     }
 
     fetchUserData();
-  }, []);
+  }, [navigate]);
 
   if (loading) {
     return <div className="loading-spinner">Loading...</div>;
@@ -58,38 +57,45 @@ const Profile = () => {
 
   return (
     <div className="profile-page">
-      <h2>Profile</h2>
+      <header className="profile-header">
+        {" "}
+        <button className="back-button" onClick={() => window.history.back()}>
+          ←
+        </button>
+        <h2>Profile</h2>
+      </header>
       <div className="user-detail-card">
-        <p style={{ justifyContent: "flex-start" }}>
-          Full Name:
+        <div className="profile-field">
+          <label>Full Name:</label>
           <input
             className="inputt"
             value={userData.fullname || "N/A"}
             readOnly
           />
-        </p>
+        </div>
 
-        <p>
-          Email:
+        <div className="profile-field">
+          <label>Email:</label>
           <input className="inputt" value={userData.email || "N/A"} readOnly />
-        </p>
+        </div>
 
-        <p>
-          Address:
+        <div className="profile-field">
+          <label>Address:</label>
           <input
             className="inputt"
             value={userData.address || "N/A"}
             readOnly
           />
-        </p>
-        <p>
-          Contact:
+        </div>
+
+        <div className="profile-field">
+          <label>Contact:</label>
           <input
             className="inputt"
             value={userData.contactNo || "N/A"}
             readOnly
           />
-        </p>
+        </div>
       </div>
     </div>
   );

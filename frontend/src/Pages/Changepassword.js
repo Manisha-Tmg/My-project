@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { APIURL } from "../env";
 import "../Css/Changepass.css";
 
@@ -64,7 +64,14 @@ const Changepassword = () => {
 
   return (
     <form className="form-password" onSubmit={handlepassword}>
-      <h2>Change Password</h2>
+      <header className="profile-header1">
+        <Link to={"/complain"}>
+          <button className="back-button" onClick={() => window.history.back()}>
+            ←
+          </button>
+        </Link>
+        <h2>Change Password</h2>
+      </header>
       <div>Old password :</div>
       <input
         type="password"

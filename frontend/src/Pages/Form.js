@@ -11,14 +11,13 @@ const ComplaintForm = () => {
 
   const [formData, setFormData] = useState({
     complaintTitle: "",
-
     provinceId: "",
     districtId: "",
     tole: "",
     ward: "",
     description: "",
     categoryName: grievanceType,
-    file: [],
+    attachments: [],
   });
 
   const [loading, setLoading] = useState(false);
@@ -31,51 +30,53 @@ const ComplaintForm = () => {
     setErrors({ ...errors, [name]: "" });
   };
 
-  const handleFileChange = (e) => {
-    setFormData({ ...formData, file: [...e.target.files] });
+  const handleFileChange = async (e) => {
+    const files = Array.from(e.target.files);
+    setLoading(true);
+
+    try {
+      const uploadPromises = files.map(async (file) => {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", "SamasyaSewa");
+
+        const response = await fetch(
+          "https://api.cloudinary.com/v1_1/ddh1i3vod/image/upload",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+
+        if (!response.ok) throw new Error("Upload failed");
+        const result = await response.json();
+
+        return {
+          url: result.secure_url,
+          fileName: file.name,
+        };
+      });
+
+      const uploadedFiles = await Promise.all(uploadPromises);
+      setFormData((prev) => ({
+        ...prev,
+        attachments: [...prev.attachments, ...uploadedFiles],
+      }));
+    } catch (error) {
+      setResponseMessage("Error uploading files: " + error.message);
+    } finally {
+      setLoading(false);
+    }
   };
-
-  // const validateForm = () => {
-  //   const newErrors = {};
-
-  //   if (!formData.complaintTitle.trim()) {
-  //     newErrors.complaintTitle = "Complaint title is required";
-  //   }
-
-  //   if (!formData.categoryName) {
-  //     newErrors.categoryName = "Category is required";
-  //   }
-
-  //   if (!formData.provinceId) {
-  //     newErrors.provinceId = "Province is required";
-  //   }
-
-  //   if (!formData.districtId) {
-  //     newErrors.districtId = "District is required";
-  //   }
-
-  //   if (!formData.ward.trim()) {
-  //     newErrors.ward = "Ward is required";
-  //   }
-
-  //   setErrors(newErrors);
-  //   return Object.keys(newErrors).length === 0;
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // if (!validateForm()) {
-    //   setResponseMessage("Please fill all required fields.");
-    //   return;
-    // }
-
     setLoading(true);
     setResponseMessage("");
 
     try {
       const accessToken = localStorage.getItem("accessToken");
 
-      // Ensure all required location fields are properly formatted
       const requestBody = {
         complaintTitle: formData.complaintTitle.trim(),
         description: formData.description.trim(),
@@ -86,17 +87,11 @@ const ComplaintForm = () => {
           provinceId: parseInt(formData.provinceId, 10),
           districtId: parseInt(formData.districtId, 10),
         },
-        attachments: formData.file.map((file) => ({ url: file.name })),
+        attachments: formData.attachments,
         anonymous: false,
       };
 
-      // Validate location data before sending
-      if (
-        !requestBody.location.provinceId ||
-        !requestBody.location.districtId
-      ) {
-        throw new Error("Province and District are required");
-      }
+      console.log("Sending request with body:", requestBody); // Add this for debugging
 
       const response = await fetch(`${APIURL}/api/v1/complaint`, {
         method: "POST",
@@ -109,10 +104,10 @@ const ComplaintForm = () => {
       });
 
       const result = await response.json();
+      console.log("Received response:", result);
 
       if (response.ok) {
         setResponseMessage("Complaint submitted successfully!");
-        // Reset form
         setFormData({
           complaintTitle: "",
           provinceId: "",
@@ -121,16 +116,14 @@ const ComplaintForm = () => {
           ward: "",
           description: "",
           categoryName: grievanceType,
-          file: [],
+          attachments: [],
         });
-        setErrors({});
         navigate("/complain");
       } else {
         setResponseMessage(
           "Error: " + (result.message || "Failed to submit complaint.")
         );
         if (result.errors) {
-          console.error("Validation errors:", result.errors);
           const backendErrors = {};
           result.errors.forEach((error) => {
             if (error.includes("district")) {
@@ -163,14 +156,11 @@ const ComplaintForm = () => {
       <form className="complaint-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Complaint Title *</label>
-          <p className="note">
-            [Note: To address the complaint effectively, please provide detailed
-            information]
-          </p>
           <input
             type="text"
+            className="title"
             name="complaintTitle"
-            className={`title ${errors.complaintTitle ? "error" : ""}`}
+            // className={errors.complaintTitle ? "error" : ""}
             value={formData.complaintTitle}
             onChange={handleChange}
             placeholder="Enter complaint title"
@@ -201,7 +191,7 @@ const ComplaintForm = () => {
               setFormData((prev) => ({
                 ...prev,
                 provinceId: id,
-                districtId: "", // Reset district when province changes
+                districtId: "",
               }));
               setErrors({ ...errors, provinceId: "", districtId: "" });
             }}
@@ -232,10 +222,10 @@ const ComplaintForm = () => {
           <input
             type="text"
             name="ward"
-            className={`title ${errors.ward ? "error" : ""}`}
+            className="title"
             value={formData.ward}
             onChange={handleChange}
-            placeholder="Ward no. *"
+            placeholder="Ward no"
             required
           />
           {errors.ward && <span className="error-text">{errors.ward}</span>}
@@ -262,6 +252,13 @@ const ComplaintForm = () => {
             multiple
             onChange={handleFileChange}
           />
+          {formData.attachments.length > 0 && (
+            <div className="mt-2">
+              <p className="text-sm text-gray-600">
+                {formData.attachments.length} file(s) attached
+              </p>
+            </div>
+          )}
         </div>
 
         <button type="submit" className="submit-button" disabled={loading}>

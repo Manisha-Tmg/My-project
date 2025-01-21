@@ -1,18 +1,16 @@
 * {
   margin: 0;
-  padding: 0%;
+  padding: 0;
   color: #ffffff;
 }
 
 .contact-container {
-  /* margin-top: 5%; */
-  font-family: Arial, sans-serif;
   margin-top: 100px;
   padding: 10px;
   max-width: 80%;
   text-align: center;
-  margin-left: 160px;
-  margin-right: 160px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .contact-title {
@@ -23,10 +21,8 @@
 }
 
 .contact-card {
-  /* background-color: white; */
-  padding: 80px;
+  padding: 40px;
   border-radius: 5px;
-  /* box-shadow: 0 2px 4px rgba(253, 252, 252, 0.1); */
 }
 
 .contact-card h3 {
@@ -57,7 +53,65 @@
 .contact-footer {
   margin-top: 30px;
   font-size: 18px;
-  color: #c4dad2;
   color: white;
   padding: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contact-container {
+    margin-top: 50px;
+    padding: 10px;
+    max-width: 90%;
+  }
+
+  .contact-title {
+    font-size: 1.5rem;
+    padding: 20px;
+  }
+
+  .contact-card {
+    padding: 30px;
+  }
+
+  .contact-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .contact-card p {
+    font-size: 1rem;
+  }
+
+  .contact-footer {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-container {
+    margin-top: 30px;
+    padding: 5px;
+    max-width: 95%;
+  }
+
+  .contact-title {
+    font-size: 1.2rem;
+    padding: 15px;
+  }
+
+  .contact-card {
+    padding: 20px;
+  }
+
+  .contact-card h3 {
+    font-size: 1rem;
+  }
+
+  .contact-card p {
+    font-size: 0.9rem;
+  }
+
+  .contact-footer {
+    font-size: 14px;
+  }
 }

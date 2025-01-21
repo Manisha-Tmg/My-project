@@ -1,54 +1,112 @@
+/* Container for complaints */
 .complaints-container {
-  /* margin: 20px; */
-  margin-top: 15%;
+  max-width: 800px;
+  margin: 20px auto;
   padding: 20px;
-  background-color: #ffffff;
+  border: 1px solid #ddd;
   border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Header for the complaints section */
 .complaints-header {
-  font-size: 1.5rem;
+  font-size: 24px;
   font-weight: bold;
-  color: #000000;
-  align-items: center;
-  justify-content: center;
-
-  background-color: #ffffff;
-
-  margin-bottom: 16px;
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
 }
 
+/* Complaint details container */
 .complaint-details {
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 15px;
   background-color: #ffffff;
-
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Rows inside each complaint detail */
 .complaint-row {
-  display: flex;
   background-color: #ffffff;
-  color: #000000;
+
+  display: flex;
   justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid #e0e0e0;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
+/* Labels for each complaint detail */
 .complaint-label {
   background-color: #ffffff;
 
   font-weight: bold;
   color: #000000;
+  flex: 1;
 }
 
+/* Values for each complaint detail */
 .complaint-value {
-  color: #000000;
+  flex: 2;
   background-color: #ffffff;
 
-  text-align: right;
+  color: #333;
+  font-size: 14px;
+  word-wrap: break-word;
 }
 
-.complaint-row:last-child {
-  border-bottom: none;
+/* Attachments section */
+.complaint-attachments {
+  background-color: #ffffff;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Attachment links */
+.attachment-link {
+  background-color: #ffffff;
+
+  color: #007bff;
+  text-decoration: none;
+  font-size: 14px;
+  border: 1px solid #007bff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.attachment-link:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* No attachments fallback text */
+.complaint-attachments span {
+  color: #888;
+  font-style: italic;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 600px) {
+  .complaint-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .complaint-label {
+    margin-bottom: 5px;
+  }
+
+  .complaint-value {
+    font-size: 13px;
+  }
+
+  .attachment-link {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
 }

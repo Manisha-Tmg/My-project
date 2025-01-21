@@ -1,94 +1,67 @@
-import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import "../Css/Dropdown.css";
+// import React, { useEffect, useState } from "react";
+// import { Link, useLocation, useNavigate } from "react-router-dom";
+// import "../Css/Dropdown.css";
 
-const Dropdown = () => {
-  const [isLogin, setIsLogin] = useState(false);
-  const location = useLocation();
+// const Dropdown = () => {
+//   const [isLogin, setIsLogin] = useState(false);
+//   const location = useLocation();
+//   const navigate = useNavigate();
 
-  const signUpLocation = location.pathname;
-  const otpLocation = location.pathname;
-  const forgotLocation = location.pathname;
+//   useEffect(() => {
+//     const token = localStorage.getItem("token");
+//     const currentPath = location.pathname;
 
-  const navigate = useNavigate();
+//     const publicPaths = ["/signin", "/otp", "/forgot"];
 
-  useEffect(() => {
-    const myToken = localStorage.getItem("token");
-    if (
-      myToken &&
-      signUpLocation !== "/signin" &&
-      forgotLocation !== "/forgot"
-    ) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-      if (
-        signUpLocation !== "/signin" &&
-        otpLocation !== "/otp" &&
-        forgotLocation !== "/forgot"
-      ) {
-        navigate("/login"); // Redirect to login page only if not on /signin page/forgetpass
-      }
-    }
-  }, [navigate, signUpLocation]);
+//     if (token && !publicPaths.includes(currentPath)) {
+//       setIsLogin(true);
+//     } else {
+//       setIsLogin(false);
+//       if (!publicPaths.includes(currentPath)) {
+//         navigate("/login");
+//       }
+//     }
+//   }, [location, navigate]);
 
-  const handleLogout = () => {
-    const confirmCheck = window.confirm("Are you sure want to logout?");
-    if (confirmCheck) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("accessToken");
-      setIsLogin(false);
-      navigate("/login");
-    }
-  };
+//   const handleLogout = () => {
+//     if (window.confirm("Are you sure you want to logout?")) {
+//       localStorage.removeItem("token");
+//       localStorage.removeItem("accessToken");
+//       setIsLogin(false);
+//       navigate("/login");
+//     }
+//   };
 
-  return (
-    <div className="dropdown-list">
-      {isLogin ? (
-        <Link to={"/"}>
-          <li className="drop-home">Home</li>
-        </Link>
-      ) : (
-        <span>
-          <li className="drop-home">Home</li>
-        </span>
-      )}
-      {isLogin ? (
-        <Link to={"/Aboutus"}>
-          <li className="drop-about">About Us</li>
-        </Link>
-      ) : (
-        <span>
-          <li className="drop-about">About Us</li>
-        </span>
-      )}
-      {isLogin ? (
-        <Link to={"/contact"}>
-          <li className="drop-contact">Contact</li>
-        </Link>
-      ) : (
-        <span>
-          <li className="drop-contact">Contact</li>
-        </span>
-      )}
+//   return (
+//     <div className="dropdown-list">
+//       <ul>
+//         <li className="drop-home">
+//           {isLogin ? <Link to="/">Home</Link> : <span>Home</span>}
+//         </li>
+//         <li className="drop-about">
+//           {isLogin ? (
+//             <Link to="/aboutus">About Us</Link>
+//           ) : (
+//             <span>About Us</span>
+//           )}
+//         </li>
+//         <li className="drop-contact">
+//           {isLogin ? <Link to="/contact">Contact</Link> : <span>Contact</span>}
+//         </li>
+//         <li className="log">
+//           {isLogin ? (
+//             <span onClick={handleLogout} style={{ cursor: "pointer" }}>
+//               Log Out
+//             </span>
+//           ) : (
+//             <Link to="/login" style={{ textDecoration: "none" }}>
+//               Log In
+//             </Link>
+//           )}
+//         </li>
+//       </ul>
+//     </div>
+//   );
+// };
 
-      {isLogin ? (
-        <Link
-          onClick={handleLogout}
-          className="log"
-          style={{ textDecoration: "none" }}
-        >
-          Log Out
-        </Link>
-      ) : (
-        <Link to="/login">
-          <li className="log" style={{ textDecoration: "none" }}>
-            Log In
-          </li>
-        </Link>
-      )}
-    </div>
-  );
-};
-
-export default Dropdown;
+// export default Dropdown;

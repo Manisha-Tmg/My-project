@@ -14,7 +14,6 @@ const OtpVerification = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Extract token and email from URL parameters
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const tokenParam = params.get("token");

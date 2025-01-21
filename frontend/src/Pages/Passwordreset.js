@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { APIURL } from "../env";
 import "../Css/forgot.css";
 
@@ -32,8 +32,15 @@ const EmailVerification = () => {
 
   return (
     <div className="email-verification">
+      <header className="profile-header1">
+        <Link to={"/login"}>
+          <button className="back-button" onClick={() => window.history.back()}>
+            ←
+          </button>
+        </Link>
+        <h2> Password Reset</h2>
+      </header>{" "}
       <div className="div-verification">
-        <h2>Forgot Password</h2>
         <p style={{ marginTop: "15px" }}>
           Please enter your email to reset the password
         </p>

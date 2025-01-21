@@ -78,6 +78,27 @@ const Mycomplain = () => {
               {new Date(complaint.createdAt).toLocaleString()}
             </span>
           </div>
+          <div className="complaint-row">
+            <span className="complaint-label">Attachments:</span>
+            <span className="complaint-value">
+              {Array.isArray(complaint.attachments) &&
+              complaint.attachments.length > 0 ? (
+                complaint.attachments.map((attachment) => (
+                  <a
+                    className="complaint-value"
+                    key={attachment.id}
+                    href={attachment.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View Attachment {attachment.id}
+                  </a>
+                ))
+              ) : (
+                <span className="complaint-value">No attachments</span>
+              )}{" "}
+            </span>
+          </div>
         </div>
       ))}
     </div>

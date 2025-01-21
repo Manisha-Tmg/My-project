@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: DM Sans;
 }
 
 .page-container {
@@ -57,7 +56,7 @@
 .footer-links li {
   display: flex;
   align-items: center;
-  gap:6px;
+  gap: 6px;
 }
 
 .footer-link {
@@ -80,4 +79,10 @@
 
 .social-icon:hover {
   opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    margin-top: 13.5rem;
+  }
 }

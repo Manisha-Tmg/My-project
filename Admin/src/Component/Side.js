@@ -21,7 +21,7 @@ const SideBar = () => {
             <Link to="/complaints">Complaint Management</Link>
           </li>
         </ul>
-        <Link to={"/Login"}>
+        <Link to={"/"}>
           <button className="admin-logout-button">
             Logout <IoIosLogOut className="admin-logout-icon" />{" "}
           </button>

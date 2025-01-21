@@ -74,7 +74,6 @@ const ComplaintDetails = () => {
           </Link>
           Complaint Details
         </h3>
-        <FaEdit className="complain-edit-icon" />
         <table className="detailstable">
           <tbody>
             <tr>
@@ -115,7 +114,23 @@ const ComplaintDetails = () => {
             </tr>
             <tr>
               <th>Attachments</th>
-              <td>{complaint.attachments}</td>
+              <td>
+                {Array.isArray(complaint.attachments) &&
+                complaint.attachments.length > 0 ? (
+                  complaint.attachments.map((attachment) => (
+                    <a
+                      key={attachment.id}
+                      href={attachment.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View Attachment {attachment.id}
+                    </a>
+                  ))
+                ) : (
+                  <span>No attachments</span>
+                )}
+              </td>
             </tr>
           </tbody>
         </table>

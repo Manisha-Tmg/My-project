@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { APIURL } from "../env";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../Css/forgot.css";
-import { IoIosArrowBack } from "react-icons/io";
 
 const ForgotPassword = () => {
   const [newPassword, setNewPassword] = useState("");
@@ -50,12 +49,15 @@ const ForgotPassword = () => {
 
   return (
     <div className="email-verification">
+      <header className="profile-header1">
+        <Link to={"/login"}>
+          <button className="back-button" onClick={() => window.history.back()}>
+            ←
+          </button>
+        </Link>
+        <h2>Change Password</h2>
+      </header>{" "}
       <div className="div-verification">
-        <h2 className="titlle">Set a new password</h2>
-        <IoIosArrowBack
-          className="iconnn"
-          style={{ height: "30px", width: "30px" }}
-        />
         <p className="icons" style={{ marginTop: "15px" }}>
           Create a new password. Ensure it differs from previous ones for
           security

@@ -4,15 +4,15 @@
 }
 
 .otp-verification-container {
-  margin-top: 35%;
-
+  margin-top: 10%; /* Reduced margin */
+  display: flex; /* Ensure proper alignment */
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  justify-items: center;
 }
+
 .otp-page {
   display: flex;
-
   flex-direction: column;
   height: 100vh;
   font-family: Arial, sans-serif;
@@ -20,12 +20,20 @@
   margin: 0;
   padding: 20px;
 }
+
 .otp-instructions {
+  text-align: center;
+  color: #000000;
+  background-color: #ffffff;
 }
+
 .otp-header {
-  color: #ffffff;
+  color: #000000;
+  background-color: #ffffff;
+
   font-size: 24px;
-  margin-bottom: 30px;
+  margin-bottom: 20px; /* Adjusted margin */
+  text-align: center;
 }
 
 .otp-form {
@@ -42,37 +50,41 @@
 }
 
 .otp-verification-form {
-  margin-top: 15%;
-  padding: 30px;
+  margin-top: 5%;
+  padding: 20px;
   border-radius: 8px;
   max-width: 400px;
   width: 100%;
+  background-color: #ffffff;
 }
 
 .otp-message {
   margin-top: 10px;
   font-size: 14px;
   color: #e8dcdc;
+  text-align: center;
+  background-color: #ffffff;
 }
+
 .btn-verify {
   background-color: var(--buttoncolor);
-  border: 2px solid var(--buttoncolor);
   color: white;
   padding: 10px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   width: 100%;
   font-size: 16px;
   cursor: pointer;
   margin-top: 10px;
-  border-radius: 10px;
 }
 
 .btn-verify:hover {
   background-color: var(--buttonhover);
-  /* border: 2px solid #e82f22; */
 }
+
 .otp-input-container {
+  background-color: #ffffff;
+
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
@@ -84,18 +96,50 @@
   text-align: center;
   font-size: 18px;
   background-color: #ffffff;
-  border: 1px solid #ddd;
+  border: 1px solid #0f0e0e;
   color: black;
   border-radius: 8px;
   outline: none;
 }
 
 .error-message {
-  color: #a80000;
   font-size: 14px;
+  text-align: center;
+  color: #a00000;
+  background-color: #ffffff;
 }
 
 .success-message {
   color: #28a745;
   font-size: 14px;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .otp-page {
+    padding: 10px;
+  }
+
+  .otp-verification-container {
+    margin-top: 5%;
+  }
+
+  .otp-header {
+    font-size: 20px;
+  }
+
+  .btn-verify {
+    font-size: 14px;
+  }
+
+  .otp-input {
+    width: 35px;
+    height: 45px;
+    font-size: 16px;
+  }
+
+  .otp-verification-form {
+    padding: 15px;
+  }
 }

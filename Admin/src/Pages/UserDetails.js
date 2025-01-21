@@ -85,10 +85,6 @@ const UserDetails = () => {
 
         {user ? (
           <div className="user-details-card">
-            <FaEdit
-              className="edit-icon"
-              onClick={() => navigate(`/admin/editUser/${user.id}`)}
-            />
             <table className="detailstable">
               <tbody>
                 <tr>

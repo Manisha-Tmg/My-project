@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../Css/Login.css";
+// import { FaRegEye } from "react-icons/fa";
+// import { FaRegEyeSlash } from "react-icons/fa";
 import { APIURL } from "../env";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [success, setSuccess] = useState(null);
+  // const [showHide, setShowHide] = useState(false);
+  const [sucess, SetSucess] = useState(null);
   const [err, setErr] = useState("");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -29,18 +32,12 @@ const Login = () => {
 
       if (userData.success) {
         setLoading(false);
-        setSuccess(userData.message);
+        SetSucess(userData.message);
         setEmail("");
         setPassword("");
         localStorage.setItem("accessToken", userData.data.accessToken);
         localStorage.setItem("token", userData.data.token);
-        localStorage.setItem("role", userData.data.role);
-
-        if (userData.data.role === "ADMIN") {
-          navigate("/dashboard");
-        } else if (userData.data.role === "USER") {
-          navigate("/complain");
-        }
+        navigate("/dashboard");
       } else {
         setErr(userData.message);
         setLoading(false);
@@ -51,16 +48,16 @@ const Login = () => {
   }
 
   return (
-    <div className="log-body-login">
+    <div className="body-login">
       <form className="form-login" onSubmit={handleLogin}>
         <div className="mb-3">
-          <label htmlFor="exampleInputEmail1" className="log-form-label">
+          <label htmlFor="exampleInputEmail1" className="form-label">
             Email
           </label>
           <input
             type="email"
             placeholder="Email"
-            className="log-form-control"
+            className="logform-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             value={email}
@@ -70,37 +67,33 @@ const Login = () => {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="exampleInputEmail1" className="log-form-label">
+          <label htmlFor="exampleInputPassword1" className="form-label">
             Password
           </label>
           <input
             type="password"
-            className="log-form-control"
+            // type={showHide ? "text" : "password"}
+            className="logform-control"
             placeholder="Password"
             id="exampleInputPassword1"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+          {/* <span
+            type="text"
+            className="eyebutton"
+            onClick={() => setShowHide(!showHide)}
+          >
+            {showHide ? <FaRegEye /> : <FaRegEyeSlash />}
+          </span>{" "} */}
         </div>
 
-        <div className="remember-forgot">
-          <Link id="forgot" to={"/forgot"}>
-            Forgot Password?
-          </Link>
-        </div>
         {err && <p style={{ color: "red" }}>{err}</p>}
-        {success && <p style={{ color: "green" }}>{success}</p>}
+        {sucess && <p style={{ color: "green" }}>{sucess}</p>}
         <button className="logbutton" type="submit" disabled={loading}>
           {loading ? "Logging in..." : "Login"}
         </button>
-
-        <label className="account1" htmlFor="exampleCheck1">
-          Don't have an account?{" "}
-          <Link to={"/signin"} className="sign">
-            Sign Up
-          </Link>
-        </label>
       </form>
     </div>
   );

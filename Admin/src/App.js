@@ -4,6 +4,7 @@ import AdminDashboard from "./Pages/AdminDashboard.js";
 import ComplainManagement from "./Pages/ComplainManagement.js";
 import ComplainDetails from "./Pages/ComplainDetails.js";
 import UserDetails from "./Pages/UserDetails.js";
+
 import Login from "./Pages/Login.js";
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
           element={<ComplainDetails />}
         ></Route>
         <Route path="/complaints" element={<ComplainManagement />}></Route>
-        <Route path="/Login" element={<Login />}></Route>
+        <Route path="/" element={<Login />}></Route>
       </Routes>
     </Router>
   );

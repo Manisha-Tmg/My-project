@@ -192,7 +192,7 @@ const Signin = () => {
       const userData = await res.json();
       if (userData.success) {
         setMsg("Registration successful!");
-        navigate("/verify-user");
+        navigate("/login");
       } else {
         setMsg(userData.message || "Registration failed.");
       }
